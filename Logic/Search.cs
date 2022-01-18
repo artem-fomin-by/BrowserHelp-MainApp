@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 
-namespace Logic.FindServ
-{
+namespace Logic{
     public static class Search{
         private static readonly RegistryKey[] StartKeys ={
             Registry.CurrentUser,

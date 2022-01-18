@@ -1,7 +1,6 @@
 ﻿using System.IO;
 
-namespace Logic
-{
+namespace Logic{
     public static class Find{
     }
 }

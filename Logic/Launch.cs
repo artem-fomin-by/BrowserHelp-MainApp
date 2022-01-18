@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Logic
-{
+namespace Logic{
     public static class Launch{
     }
 }
