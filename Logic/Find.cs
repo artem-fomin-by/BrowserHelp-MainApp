@@ -1,11 +1,11 @@
-﻿using System.Runtime.InteropServices;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
+
+using Logic.Exceptions;
 
 namespace Logic{
     public static class Find{
         public static RegistryKey GetKey(string link){
-            if(!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                throw new NotSupportedException("The GetKey function does not support any OS but Microsoft Windows");
+            NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
 
             RegistryKey cur;
             var keysNames = link.Split(@"\");
@@ -30,15 +30,17 @@ namespace Logic{
                 case "HKEY_PERFORMANCE_DATA":
                     cur = Registry.PerformanceData;
                     break;
-                default: throw new ArgumentException(
-                    "Cannot find the RegistryKey: " + keysNames[0] + "\nFull key: " + link);
+                default:
+                    throw new ArgumentException("Cannot find the RegistryKey",
+                        new RegKeyNotFoundException(keysNames[0], link));
             }
 
             for (int i = 1; i < keysNames.Length; i++)
             {
                 cur = cur.OpenSubKey(keysNames[i]);
                 if (cur == null) 
-                    throw new ArgumentException(new KeyNotFoundException(keyName));
+                    throw new ArgumentException("Cannot find the RegistryKey", 
+                        new RegKeyNotFoundException(keysNames[i], link));
             }
 
             return cur;
