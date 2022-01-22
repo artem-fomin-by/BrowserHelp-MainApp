@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System.Runtime.InteropServices;
 
 namespace Logic{
     public static class Search{
@@ -12,7 +13,10 @@ namespace Logic{
         };
 
         public static IEnumerable<RegistryKey> FromBottomToTopDFS(){
-            foreach(var startKey in StartKeys){
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                throw new NotSupportedException("The {0} function does not support any OS but Microsoft Windows");
+
+            foreach (var startKey in StartKeys){
                 foreach(var ret in FromBottomToTopDFS(startKey)){
                     yield return ret;
                 }
