@@ -7,7 +7,7 @@ namespace Logic.BrowserLogic{
         private const string BrowsersKeyPath = @"HKEY_LOCAL_MACHINE\SOFTWARE\Clients\StartMenuInternet";
         private const string BrowserLaunchCommandPath = @"\shell\open\command";
         private const string LaunchCommandValueName = "";
-        
+
         #endregion
 
         private const string SystemBrowser = "IEXPLORE.EXE"; // Browser to ignore
@@ -22,7 +22,7 @@ namespace Logic.BrowserLogic{
 
             return FilteredBrowsersNames.Select(
                 x => new Browser(x,
-                    (string) Search.GetKey(BrowserLaunchCommandPath, 
+                    (string) Search.GetKey(BrowserLaunchCommandPath,
                             BrowsersKey.OpenSubKey(x))
                         .GetValue(LaunchCommandValueName))).ToArray();
         }

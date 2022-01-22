@@ -1,7 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Logic.Exceptions
-{
+namespace Logic.Exceptions{
     public class NotSupportedOSException : NotSupportedException{
         public const string Windows = "Microsoft Windows";
         public const string Linux = "Linux";
@@ -26,18 +25,18 @@ namespace Logic.Exceptions
                 default: throw new NotSupportedOSException("OS: " + osName + " is not supported");
             }
 
-            if (!RuntimeInformation.IsOSPlatform(os))
+            if(!RuntimeInformation.IsOSPlatform(os))
                 throw new NotSupportedException("The GetKey function does not support any OS but Microsoft Windows");
         }
 
         #region Constructors
-        
+
         public NotSupportedOSException() : base(){}
 
         public NotSupportedOSException(string message) : base(message){}
 
-        public NotSupportedOSException(string message, Exception innerException) : base(message, innerException) {}
-        
+        public NotSupportedOSException(string message, Exception innerException) : base(message, innerException){}
+
         #endregion
     }
 }

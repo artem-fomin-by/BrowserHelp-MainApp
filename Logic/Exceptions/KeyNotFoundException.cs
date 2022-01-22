@@ -14,8 +14,7 @@
         }
 
         public RegKeyNotFoundException(string keyName, string keyFullName, string message, Exception innerException) :
-            base(message, innerException)
-        {
+            base(message, innerException){
             KeyName = keyName;
             KeyFullName = keyFullName;
         }
