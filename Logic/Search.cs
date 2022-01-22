@@ -16,7 +16,7 @@ namespace Logic{
         public static IEnumerable<RegistryKey> FromBottomToTopDFS(){
             NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
 
-            foreach (var startKey in StartKeys){
+            foreach(var startKey in StartKeys){
                 foreach(var ret in FromBottomToTopDFS(startKey)){
                     yield return ret;
                 }
@@ -37,15 +37,13 @@ namespace Logic{
             yield return cur;
         }
 
-        public static RegistryKey GetKey(string link)
-        {
+        public static RegistryKey GetKey(string link){
             NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
 
             RegistryKey cur;
             var keysNames = link.Split(@"\");
 
-            switch (keysNames[0])
-            {
+            switch(keysNames[0]){
                 case "HKEY_CURRENT_USER":
                     cur = Registry.CurrentUser;
                     break;
@@ -69,10 +67,23 @@ namespace Logic{
                         new RegKeyNotFoundException(keysNames[0], link));
             }
 
-            for (int i = 1; i < keysNames.Length; i++)
-            {
+            for(int i = 1; i < keysNames.Length; i++){
                 cur = cur.OpenSubKey(keysNames[i]);
-                if (cur == null)
+                if(cur == null)
+                    throw new ArgumentException("Cannot find the RegistryKey",
+                        new RegKeyNotFoundException(keysNames[i], link));
+            }
+
+            return cur;
+        }
+
+        public static RegistryKey GetKey(string link, RegistryKey start){
+            var cur = start;
+            var keysNames = link.Split(@"\");
+
+            for(int i = 1; i < keysNames.Length; i++){
+                cur = cur.OpenSubKey(keysNames[i]);
+                if(cur == null)
                     throw new ArgumentException("Cannot find the RegistryKey",
                         new RegKeyNotFoundException(keysNames[i], link));
             }
