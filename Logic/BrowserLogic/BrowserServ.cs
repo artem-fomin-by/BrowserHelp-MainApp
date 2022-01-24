@@ -4,7 +4,7 @@ namespace Logic.BrowserLogic{
     public static class BrowserServ{
         #region RegistryKeyPathes
 
-        private const string BrowsersKeyPath = @"HKEY_LOCAL_MACHINE\SOFTWARE\Clients\StartMenuInternet";
+        public const string BrowsersKeyPath = @"HKEY_LOCAL_MACHINE\SOFTWARE\Clients\StartMenuInternet";
         private const string BrowserLaunchCommandPath = @"\shell\open\command";
         private const string LaunchCommandValueName = "";
 
