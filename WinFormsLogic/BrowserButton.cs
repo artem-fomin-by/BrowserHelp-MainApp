@@ -21,7 +21,7 @@ namespace WinFormsLogic{
             Click += LaunchBrowser;
         }
 
-        public void Initialise(int x, int y, int index){
+        public void Initialize(int x, int y, int index){
             Location = new Point(x, y);
             Size = new Size();
             TabIndex = index;

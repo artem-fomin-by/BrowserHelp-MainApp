@@ -34,7 +34,7 @@ namespace MainApp{
             var i = 0;
 
             foreach(var button in Buttons){
-                button.Initialise(x, y, i);
+                button.Initialize(x, y, i);
                
                 x = x + BrowserButton.STD_SizeX;
                 y = y + BrowserButton.STD_SizeY + STD_BFromB_Indent;

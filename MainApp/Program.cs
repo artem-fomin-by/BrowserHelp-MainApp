@@ -4,25 +4,26 @@ using WinFormsLogic;
 
 namespace MainApp{
     public static class Program{
-        private const string AppName = "";
+        private const string AppName = "BrowserHelper";
 
+        //ToDo Make RegKeyNameToIgnore
         [STAThread]
-        public static void Main(){
-            var inp = Environment.GetCommandLineArgs()[0];
-            if(inp.Equals("install")){
+        public static void Main(string[] args){
+            if(args[0].Equals("install")){
                 Installer.Install(AppName);
                 return;
             }
 
-            if(inp.Equals("Delete") || inp.Equals("Remove")){
+            if(args[0].Equals("Delete") || args[0].Equals("Remove")){
                 Remover.Remove(AppName);
                 return;
             }
 
-            var FoundBrowsers = BrowserServ.FindBrowsers(AppName).Select(
-                x => new BrowserButton(x, inp)).ToArray();
-
             ApplicationConfiguration.Initialize();
+
+            var FoundBrowsers = BrowserServ.FindBrowsers(AppName).Select(
+                x => new BrowserButton(x, args[0])).ToArray();
+
             Application.Run(new Form1(FoundBrowsers, AppName));
         }
     }
