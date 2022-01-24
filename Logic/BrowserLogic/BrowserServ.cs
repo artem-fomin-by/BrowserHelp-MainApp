@@ -15,16 +15,20 @@ namespace Logic.BrowserLogic{
         public static Browser[] FindBrowsers(string programKeyName){
             NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
 
-            var BrowsersKey = Search.GetKey(BrowsersKeyPath);
+            var BrowsersKey = WorkWithReg.GetKey(BrowsersKeyPath);
             var BrowsersNames = BrowsersKey.GetSubKeyNames();
             var FilteredBrowsersNames = BrowsersNames.Where(
                 x => !x.Equals(SystemBrowser) && !x.Equals(programKeyName));
 
             return FilteredBrowsersNames.Select(
                 x => new Browser(x,
-                    (string) Search.GetKey(BrowserLaunchCommandPath,
-                            BrowsersKey.OpenSubKey(x))
-                        .GetValue(LaunchCommandValueName))).ToArray();
+                    
+                    (string) WorkWithReg.GetKey(
+                            BrowserLaunchCommandPath,
+                            BrowsersKey.OpenSubKey(x)).GetValue(LaunchCommandValueName)
+                    )
+                
+                ).ToArray();
         }
     }
 }

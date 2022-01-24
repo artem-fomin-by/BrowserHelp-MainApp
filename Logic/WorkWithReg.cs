@@ -3,7 +3,8 @@
 using Logic.Exceptions;
 
 namespace Logic{
-    public static class Search{
+    //ToDo Write DeleteKey
+    public static class WorkWithReg{
         private static readonly RegistryKey[] StartKeys ={
             Registry.CurrentUser,
             Registry.ClassesRoot,
@@ -24,6 +25,8 @@ namespace Logic{
         }
 
         private static IEnumerable<RegistryKey> FromBottomToTopDFS(RegistryKey cur){
+            NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
+
             var subKeyNames = cur.GetSubKeyNames();
 
             if(subKeyNames.Length != 0){
