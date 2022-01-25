@@ -13,11 +13,18 @@ namespace MainApp{
         private const string STD_NoBrowsersMessage =
             "";
 
-        public Form1(BrowserButton[] buttons, string name){
+        public Form1(BrowserButton[] buttons, string name, string link){
             Buttons = buttons;
             Name = name;
             
-            InitializeComponent(buttons != null && buttons.Length > 0);
+            InitializeComponent(buttons != null && Buttons.Length > 0);
+
+            foreach(var button in Buttons){
+                button.Click += (sender, args) => {
+                    button.BrowserToLaunch.Launch(link);
+                    Application.Exit();
+                };
+            }
         }
 
         public void InitializeComponent(bool AreThereAnyButtons){

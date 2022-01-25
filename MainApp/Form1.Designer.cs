@@ -1,5 +1,4 @@
-﻿using Logic.BrowserLogic;
-using WinFormsLogic;
+﻿using WinFormsLogic;
 
 namespace MainApp{
     partial class Form1{
@@ -29,12 +28,13 @@ namespace MainApp{
         }
 
         private void InitComponent1(){
+            this.SuspendLayout();
             var x = STD_BordersX_Indent;
             var y = STD_BordersY_Indent;
             var i = 0;
 
             foreach(var button in Buttons){
-                button.Initialize(x, y, i);
+                button.Initialize(x, y, i, this);
                
                 x = x + BrowserButton.STD_SizeX;
                 y = y + BrowserButton.STD_SizeY + STD_BFromB_Indent;
@@ -46,9 +46,11 @@ namespace MainApp{
                         STD_BFromB_Indent * (i - 1);
 
             //this.components = new System.ComponentModel.Container();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(sizeX, sizeY);
             this.Text = Name;
+            this.ResumeLayout(false);
         }
 
         private void InitComponent2(){

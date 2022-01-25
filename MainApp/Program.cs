@@ -9,12 +9,12 @@ namespace MainApp{
         //ToDo Make RegKeyNameToIgnore
         [STAThread]
         public static void Main(string[] args){
-            if(args[0].Equals("install")){
+            if(args.Length > 0 && args[0].Equals("install")){
                 Installer.Install(AppName);
                 return;
             }
 
-            if(args[0].Equals("Delete") || args[0].Equals("Remove")){
+            if(args.Length > 0 && (args[0].Equals("Delete") || args[0].Equals("Remove"))){
                 Remover.Remove(AppName);
                 return;
             }
@@ -22,9 +22,9 @@ namespace MainApp{
             ApplicationConfiguration.Initialize();
 
             var FoundBrowsers = BrowserServ.FindBrowsers(AppName).Select(
-                x => new BrowserButton(x, args[0])).ToArray();
+                x => new BrowserButton(x)).ToArray();
 
-            Application.Run(new Form1(FoundBrowsers, AppName));
+            Application.Run(new Form1(FoundBrowsers, AppName, args.Length > 0 ? args[0] : ""));
         }
     }
 }

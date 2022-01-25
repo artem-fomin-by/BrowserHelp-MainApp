@@ -5,27 +5,20 @@ namespace WinFormsLogic{
         public const int STD_SizeX = 100;
         public const int STD_SizeY = 30;
 
-        private readonly Browser BrowserToLaunch;
-        private readonly string Link;
+        public readonly Browser BrowserToLaunch;
 
-        private void LaunchBrowser(object? sender, EventArgs args){
-            BrowserToLaunch.Launch(Link);
-            Application.Exit();
-        }
-
-        public BrowserButton(Browser browser, string link){ 
+        public BrowserButton(Browser browser){ 
             Name = browser.Name;
             Text = browser.Name;
             BrowserToLaunch = browser;
-            Link = link;
-            Click += LaunchBrowser;
         }
 
-        public void Initialize(int x, int y, int index){
+        public void Initialize(int x, int y, int index, Form window){
             Location = new Point(x, y);
             Size = new Size();
             TabIndex = index;
             UseVisualStyleBackColor = true;
+            window.Controls.Add(this);
         }
     }
 }
