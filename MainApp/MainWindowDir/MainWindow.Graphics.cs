@@ -20,14 +20,13 @@ namespace MainApp.MainWindowDir{
             foreach(var button in Buttons){
                 button.Initialize(x, y, i++, this);
 
-                y = y + STD_BordersX_Indent;
+                y = y + BrowserButton.STD_SizeY + STD_BFromB_Indent;
             }
 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(STD_BordersX_Indent * 2 + BrowserButton.STD_SizeX,
-                2 * STD_BordersY_Indent + i * BrowserButton.STD_SizeY + (i - 1) * STD_BFromB_Indent);
-            Text = this.Name;
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(STD_BordersX_Indent * 2 + BrowserButton.STD_SizeX, y + STD_BordersY_Indent);
+            Text = Name;
 
             ResumeLayout(false);
         }
@@ -37,6 +36,7 @@ namespace MainApp.MainWindowDir{
         }
 
         private void InitComponent3(){
+
         }
     }
 }

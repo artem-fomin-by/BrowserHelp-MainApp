@@ -4,9 +4,9 @@ namespace MainApp.MainWindowDir{
     public partial class MainWindow : Form{
         #region STD_Indent_Constants
 
-        private const int STD_BordersX_Indent = 50;
-        private const int STD_BordersY_Indent = 50;
-        private const int STD_BFromB_Indent = 30;
+        private const int STD_BordersX_Indent = 30;
+        private const int STD_BordersY_Indent = 10;
+        private const int STD_BFromB_Indent = 10;
 
         #endregion
 

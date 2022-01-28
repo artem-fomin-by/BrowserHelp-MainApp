@@ -2,8 +2,8 @@
 
 namespace WinFormsLogic{
     public class BrowserButton : Button{
-        public const int STD_SizeX = 100;
-        public const int STD_SizeY = 30;
+        public const int STD_SizeX = 80;
+        public const int STD_SizeY = 48;
 
         public readonly Browser BrowserToLaunch;
 
