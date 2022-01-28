@@ -15,7 +15,7 @@ namespace WinFormsLogic{
 
         public void Initialize(int x, int y, int index, Form window){
             Location = new Point(x, y);
-            Size = new Size();
+            Size = new Size(STD_SizeX, STD_SizeY);
             TabIndex = index;
             UseVisualStyleBackColor = true;
             window.Controls.Add(this);
