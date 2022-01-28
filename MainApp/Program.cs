@@ -27,8 +27,8 @@ namespace MainApp{
                 FoundBrowsers = BrowserServ.FindBrowsers(AppName).Select(
                     x => new BrowserButton(x)).ToArray();
             }
-            catch(Exception e){
-                Application.Run(new MainWindow(AppName, e));
+            catch(Exception exception){
+                Application.Run(new MainWindow(AppName, exception));
                 return;
             }
 

@@ -10,16 +10,11 @@ namespace MainApp.MainWindowDir{
 
         #endregion
 
-        #region STD_Messages
-
-        private const string STD_ErrorMessage = 
+        private const string STD_ErrorMessage =
             "";
+
         private const string STD_NoBrowsersMessage =
-            "";
-
-        #endregion
-
-        private readonly BrowserButton[] Buttons;
+            "No browthers ar found";
 
         public MainWindow(BrowserButton[] buttons, string name, string link){
             Buttons = buttons;
@@ -38,15 +33,34 @@ namespace MainApp.MainWindowDir{
         }
 
         public void InitializeComponent(bool AreThereAnyButtons){
-            if(AreThereAnyButtons){
-                InitComponent1();
-            }
-
-            InitComponent2();
+            if(AreThereAnyButtons) InitComponent1();
+            else InitComponent2();
         }
 
         public MainWindow(string name, Exception exception){
             Name = name;
+        }
+
+        protected override void Dispose(bool disposing){
+            if(Buttons != null){
+                foreach(var button in Buttons){
+                    button.Dispose();
+                }
+            }
+
+            if(SpecMessageBox != null){
+                SpecMessageBox.Dispose();
+            }
+
+            if(SpecErrorMessageBox != null){
+                SpecErrorMessageBox.Dispose();
+            }
+
+            if(SpecExitButton != null){
+                SpecExitButton.Dispose();
+            }
+
+            base.Dispose(disposing);
         }
     }
 }
