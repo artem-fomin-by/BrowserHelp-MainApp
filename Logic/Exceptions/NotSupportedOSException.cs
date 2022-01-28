@@ -2,10 +2,14 @@
 
 namespace Logic.Exceptions{
     public class NotSupportedOSException : NotSupportedException{
+        #region OS_Names
+
         public const string Windows = "Microsoft Windows";
         public const string Linux = "Linux";
         public const string OSX = "OSX";
         public const string FreeBSD = "FreeBSD";
+
+        #endregion
 
         public static void CheckOS(string osName){
             OSPlatform os;

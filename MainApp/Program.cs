@@ -1,5 +1,6 @@
 using Logic;
 using Logic.BrowserLogic;
+using MainApp.MainWindowDir;
 using WinFormsLogic;
 
 namespace MainApp{
@@ -21,10 +22,17 @@ namespace MainApp{
 
             ApplicationConfiguration.Initialize();
 
-            var FoundBrowsers = BrowserServ.FindBrowsers(AppName).Select(
-                x => new BrowserButton(x)).ToArray();
+            BrowserButton[] FoundBrowsers;
+            try{
+                FoundBrowsers = BrowserServ.FindBrowsers(AppName).Select(
+                    x => new BrowserButton(x)).ToArray();
+            }
+            catch(Exception e){
+                Application.Run(new MainWindow(AppName, e));
+                return;
+            }
 
-            Application.Run(new Form1(FoundBrowsers, AppName, args.Length > 0 ? args[0] : ""));
+            Application.Run(new MainWindow(FoundBrowsers, AppName, args.Length > 0 ? args[0] : ""));
         }
     }
 }
