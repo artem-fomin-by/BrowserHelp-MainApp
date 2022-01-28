@@ -7,15 +7,17 @@ namespace MainApp{
     public static class Program{
         private const string AppName = "BrowserHelper";
 
-        //ToDo Make RegKeyNameToIgnore
+        private const string STD_InstallCommand = "cmd install";
+        private const string STD_DeleteCommand = "cmd delete";
+        
         [STAThread]
         public static void Main(string[] args){
-            if(args.Length > 0 && args[0].Equals("install")){
+            if(args.Length > 0 && args[0].Equals(STD_InstallCommand)){
                 Installer.Install(AppName);
                 return;
             }
 
-            if(args.Length > 0 && (args[0].Equals("Delete") || args[0].Equals("Remove"))){
+            if(args.Length > 0 && args[0].Equals(STD_DeleteCommand)){
                 Remover.Remove(AppName);
                 return;
             }

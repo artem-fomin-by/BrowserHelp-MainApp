@@ -25,8 +25,6 @@ namespace Logic{
         }
 
         private static IEnumerable<RegistryKey> FromBottomToTopDFS(RegistryKey cur){
-            NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
-
             var subKeyNames = cur.GetSubKeyNames();
 
             if(subKeyNames.Length != 0){
@@ -81,6 +79,8 @@ namespace Logic{
         }
 
         public static RegistryKey GetKey(string link, RegistryKey start){
+            NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
+
             var cur = start;
             var keysNames = link.Split(@"\");
 
@@ -92,6 +92,28 @@ namespace Logic{
             }
 
             return cur;
+        }
+
+        public static void DeleteKey(string link){
+            NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
+
+            DeleteKey(parentKey, keyToDelete.Name, true);
+        }
+
+        public static void DeleteKey(RegistryKey keyToDelete){
+            NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
+
+            DeleteKey(parentKey, keyToDelete.Name, true);
+        }
+
+        public static void DeleteKey(RegistryKey parentKey, RegistryKey keyToDelete){
+            NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
+
+            DeleteKey(parentKey, keyToDelete.Name, true);
+        }
+
+        public static void DeleteKey(RegistryKey parentKey, string keyToDeleteName, bool isOSChecked = false){
+            if(!isOSChecked) NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
         }
     }
 }
