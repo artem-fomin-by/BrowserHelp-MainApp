@@ -97,13 +97,13 @@ namespace Logic{
         public static void DeleteKey(string link){
             NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
 
-            DeleteKey(parentKey, keyToDelete.Name, true);
+            //DeleteKey(parentKey, keyToDelete.Name, true);
         }
 
         public static void DeleteKey(RegistryKey keyToDelete){
             NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
 
-            DeleteKey(parentKey, keyToDelete.Name, true);
+            //DeleteKey(parentKey, keyToDelete.Name, true);
         }
 
         public static void DeleteKey(RegistryKey parentKey, RegistryKey keyToDelete){
