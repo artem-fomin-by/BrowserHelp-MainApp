@@ -1,6 +1,6 @@
 using Logic;
 using Logic.BrowserLogic;
-using MainApp.MainWindowDir;
+using MainApp.AppWindows;
 using WinFormsLogic;
 
 namespace MainApp{
@@ -9,7 +9,7 @@ namespace MainApp{
 
         private const string STD_InstallCommand = "cmd install";
         private const string STD_DeleteCommand = "cmd delete";
-        
+
         [STAThread]
         public static void Main(string[] args){
             if(args.Length > 0 && args[0].Equals(STD_InstallCommand)){
@@ -30,11 +30,16 @@ namespace MainApp{
                     x => new BrowserButton(x)).ToArray();
             }
             catch(Exception exception){
-                Application.Run(new MainWindow(AppName, exception));
+                Application.Run(new ErrorWindow(AppName, exception));
                 return;
             }
 
-            Application.Run(new MainWindow(FoundBrowsers, AppName, args.Length > 0 ? args[0] : ""));
+            if(FoundBrowsers != null && FoundBrowsers.Length != 0){
+                Application.Run(new MainWindow(FoundBrowsers, AppName, args.Length > 0 ? args[0] : ""));
+            }
+            else{
+                Application.Run(new NoBrowsersWindow(AppName));
+            }
         }
     }
 }
