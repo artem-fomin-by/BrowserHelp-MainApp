@@ -1,3 +1,6 @@
+using System.Diagnostics;
+
+using Logic;
 using Logic.BrowserLogic;
 using MainApp.AppWindows;
 using WinFormsLogic;
@@ -12,12 +15,12 @@ namespace MainApp{
         [STAThread]
         public static void Main(string[] args){
             if(args.Length > 0 && args[0].Equals(STD_InstallCommand)){
-                Installer.Install(AppName);
+                Install(AppName);
                 return;
             }
 
             if(args.Length > 0 && args[0].Equals(STD_DeleteCommand)){
-                Remover.Remove(AppName);
+                Remove(AppName);
                 return;
             }
 
@@ -39,6 +42,18 @@ namespace MainApp{
             else{
                 Application.Run(new NoBrowsersWindow(AppName));
             }
+        }
+
+        private static void Install(string name){
+            var browsersKey = WorkWithReg.GetKey(BrowserServ.BrowsersKeyPath);
+
+            browsersKey.CreateSubKey(name);
+        }
+
+        private static void Remove(string name){
+            WorkWithReg.DeleteKey(WorkWithReg.GetKey(BrowserServ.BrowsersKeyPath), name);
+
+            //Process.Start();
         }
     }
 }
