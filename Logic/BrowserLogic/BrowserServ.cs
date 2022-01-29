@@ -1,6 +1,4 @@
-﻿using Logic.Exceptions;
-
-namespace Logic.BrowserLogic{
+﻿namespace Logic.BrowserLogic{
     public static class BrowserServ{
         #region RegistryKeyPathes
 
@@ -13,8 +11,6 @@ namespace Logic.BrowserLogic{
         private const string SystemBrowser = "IEXPLORE.EXE"; // Browser to ignore
 
         public static Browser[] FindBrowsers(string programKeyName){
-            NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
-
             var BrowsersKey = WorkWithReg.GetKey(BrowsersKeyPath);
             var BrowsersNames = BrowsersKey.GetSubKeyNames();
             var FilteredBrowsersNames = BrowsersNames.Where(
