@@ -3,7 +3,6 @@
 using Logic.Exceptions;
 
 namespace Logic{
-    //ToDo Write DeleteKey
     public static class WorkWithReg{
         #region StartRegistryKeys
 
