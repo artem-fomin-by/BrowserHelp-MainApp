@@ -56,7 +56,11 @@ namespace MainApp{
         private static void Remove(string name){
             WorkWithReg.DeleteKey(WorkWithReg.GetKey(BrowserServ.BrowsersKeyPath), name);
 
-            //Process.Start();
+            var appPath = Application.ExecutablePath;
+            var appEXEFileName = appPath.Split(@"\")[^1];
+            var appDirectoryPath = appPath.Substring(0, appPath.Length - appEXEFileName.Length - 1);
+
+            Process.Start("cmd.exe", "rm " + appDirectoryPath + " -r");
         }
     }
 }
