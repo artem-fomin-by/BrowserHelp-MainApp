@@ -99,19 +99,23 @@ namespace Logic{
             return cur;
         }
 
-        public static void DeleteKey(string link){
-            NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
-
-            var keysNames = link.Split(@"\");
-
-            DeleteKey(GetKey(keysNames, link, 1), keysNames[^1]);
-        }
-
-
         public static void DeleteKey(RegistryKey parentKey, string keyToDeleteName, bool OSChecked = false){
             if(!OSChecked) NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
 
             parentKey.DeleteSubKeyTree(keyToDeleteName);
+        }
+
+        public static RegistryKey CreateRegistryKeysTree(RegistryKey parentKey, string link){
+            NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
+
+            var cur = parentKey;
+            var keysNames = link.Split(@"\");
+
+            for(int i = 1; i < keysNames.Length; i++){
+                cur = cur.CreateSubKey(keysNames[i]);
+            }
+
+            return cur;
         }
     }
 }

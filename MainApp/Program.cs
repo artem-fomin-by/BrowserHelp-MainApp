@@ -47,7 +47,10 @@ namespace MainApp{
         private static void Install(string name){
             var browsersKey = WorkWithReg.GetKey(BrowserServ.BrowsersKeyPath);
 
-            browsersKey.CreateSubKey(name);
+            var appKey = browsersKey.CreateSubKey(name);
+
+            var launchCommandKey = WorkWithReg.CreateRegistryKeysTree(appKey, BrowserServ.BrowserLaunchCommandPath);
+            launchCommandKey.SetValue(BrowserServ.LaunchCommandValueName, Application.ExecutablePath);
         }
 
         private static void Remove(string name){

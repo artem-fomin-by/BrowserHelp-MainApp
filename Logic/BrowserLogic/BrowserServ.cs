@@ -3,8 +3,8 @@
         #region RegistryKeyPathes
 
         public const string BrowsersKeyPath = @"HKEY_LOCAL_MACHINE\SOFTWARE\Clients\StartMenuInternet";
-        private const string BrowserLaunchCommandPath = @"\shell\open\command";
-        private const string LaunchCommandValueName = "";
+        public const string BrowserLaunchCommandPath = @"\shell\open\command";
+        public const string LaunchCommandValueName = "";
 
         #endregion
 
