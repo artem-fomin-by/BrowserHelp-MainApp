@@ -1,4 +1,3 @@
-using Logic;
 using Logic.BrowserLogic;
 using MainApp.AppWindows;
 using WinFormsLogic;
@@ -7,8 +6,8 @@ namespace MainApp{
     public static class Program{
         private const string AppName = "BrowserHelper";
 
-        private const string STD_InstallCommand = "cmd install";
-        private const string STD_DeleteCommand = "cmd delete";
+        private const string STD_InstallCommand = "install";
+        private const string STD_DeleteCommand = "delete";
 
         [STAThread]
         public static void Main(string[] args){
