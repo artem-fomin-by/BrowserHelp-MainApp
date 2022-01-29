@@ -18,6 +18,9 @@ namespace MainApp.AppWindows{
 
             InitializeComponent();
 
+            StartPosition = FormStartPosition.Manual;
+            Location = MousePosition;
+
             foreach(var button in Buttons){
                 button.Click += (sender, args) => {
                     button.BrowserToLaunch.Launch(link);
