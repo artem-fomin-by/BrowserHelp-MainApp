@@ -11,7 +11,7 @@ namespace Logic.Exceptions{
 
         #endregion
 
-        public static void CheckOS(string osName){
+        public static void CheckOS(string osName, string functionName = "\b"){
             OSPlatform os;
             switch(osName){
                 case Windows:
@@ -30,7 +30,8 @@ namespace Logic.Exceptions{
             }
 
             if(!RuntimeInformation.IsOSPlatform(os))
-                throw new NotSupportedException("The GetKey function does not support any OS but Microsoft Windows");
+                throw new NotSupportedOSException(
+                    string.Format("The {0} function does not support any OS but {1}", functionName, osName));
         }
 
         #region Constructors
