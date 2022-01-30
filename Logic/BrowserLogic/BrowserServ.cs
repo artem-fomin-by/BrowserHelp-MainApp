@@ -6,6 +6,11 @@
         public const string BrowserLaunchCommandPath = @"\shell\open\command";
         public const string LaunchCommandValueName = "";
 
+        public const string DefaultBrowserKeyPath1 =
+            @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Shell\Associations\URLAssociations\http\UserChoice";
+        public const string DefaultBrowserKeyPath2 =
+            @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Shell\Associations\URLAssociations\https\UserChoice";
+
         #endregion
 
         private const string SystemBrowser = "IEXPLORE.EXE"; // Browser to ignore

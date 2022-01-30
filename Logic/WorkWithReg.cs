@@ -17,6 +17,8 @@ namespace Logic{
 
         #endregion
 
+        public const string ProgIDsPath = @"";
+
         public static IEnumerable<RegistryKey> FromBottomToTopDFS(){
             NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
 
