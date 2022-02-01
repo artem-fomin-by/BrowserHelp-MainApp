@@ -17,7 +17,7 @@ namespace Logic{
 
         #endregion
 
-        public const string ProgIDsPath = @"";
+        public const string ProgIDsPath = @"HKEY_CLASSES_ROOT";
 
         public static IEnumerable<RegistryKey> FromBottomToTopDFS(){
             NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
