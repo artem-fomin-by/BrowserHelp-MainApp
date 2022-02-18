@@ -1,28 +1,26 @@
 ﻿using Microsoft.Win32;
 
-using Logic.Exceptions;
-
 namespace Logic{
     public static class WorkWithReg{
         #region StartRegistryKeys
 
-        private static readonly RegistryKey[] StartKeys ={
-            Registry.CurrentUser,
-            Registry.ClassesRoot,
-            Registry.CurrentConfig,
-            Registry.LocalMachine,
-            Registry.PerformanceData,
-            Registry.Users
-        };
+        private static readonly Dictionary<string, RegistryKey> StartKeys = new Dictionary<string, RegistryKey>(
+            new[]{
+                new KeyValuePair<string, RegistryKey>("HKEY_CURRENT_USER", Registry.CurrentUser),
+                new KeyValuePair<string, RegistryKey>("HKEY_CURRENT_CONFIG", Registry.CurrentConfig),
+                new KeyValuePair<string, RegistryKey>("HKEY_CLASSES_ROOT", Registry.ClassesRoot),
+                new KeyValuePair<string, RegistryKey>("HKEY_LOCAL_MACHINE", Registry.LocalMachine),
+                new KeyValuePair<string, RegistryKey>("HKEY_PERFORMANCE_DATA", Registry.PerformanceData),
+                new KeyValuePair<string, RegistryKey>("HKEY_USERS", Registry.Users)
+            }
+        );
 
         #endregion
 
         public const string ProgIDsPath = @"HKEY_CLASSES_ROOT";
 
         public static IEnumerable<RegistryKey> FromBottomToTopDFS(){
-            NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
-
-            foreach(var startKey in StartKeys){
+            foreach(var startKey in StartKeys.Values){
                 foreach(var ret in FromBottomToTopDFS(startKey)){
                     yield return ret;
                 }
@@ -44,38 +42,17 @@ namespace Logic{
         }
 
         public static RegistryKey GetKey(string link){
-            NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
-
             return GetKey(link.Split(@"\"), link);
         }
 
         private static RegistryKey GetKey(string[] keysNames, string link, int n_indexesToIgnore = 0){
-            RegistryKey cur;
-            switch(keysNames[0]){
-                case "HKEY_CURRENT_USER":
-                    cur = Registry.CurrentUser;
-                    break;
-                case "HKEY_LOCAL_MACHINE":
-                    cur = Registry.LocalMachine;
-                    break;
-                case "HKEY_USERS":
-                    cur = Registry.Users;
-                    break;
-                case "HKEY_CLASSES_ROOT":
-                    cur = Registry.ClassesRoot;
-                    break;
-                case "HKEY_CURRENT_CONFIG":
-                    cur = Registry.CurrentConfig;
-                    break;
-                case "HKEY_PERFORMANCE_DATA":
-                    cur = Registry.PerformanceData;
-                    break;
-                default:
-                    throw new ArgumentException("Cannot find the RegistryKey",
-                        new RegKeyNotFoundException(keysNames[0], link));
+            RegistryKey? cur;
+            if(!StartKeys.TryGetValue(keysNames[0], out cur)){
+                throw new ArgumentException("Cannot find the RegistryKey", nameof(keysNames),
+                    new RegKeyNotFoundException(keysNames[0], link));
             }
 
-            for(int i = 1; i < keysNames.Length - n_indexesToIgnore; i++){
+            for(var i = 1; i < keysNames.Length - n_indexesToIgnore; i++){
                 cur = cur.OpenSubKey(keysNames[i]);
                 if(cur == null)
                     throw new ArgumentException("Cannot find the RegistryKey",
@@ -86,8 +63,6 @@ namespace Logic{
         }
 
         public static RegistryKey GetKey(string link, RegistryKey start){
-            NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
-
             var cur = start;
             var keysNames = link.Split(@"\");
 
@@ -101,19 +76,15 @@ namespace Logic{
             return cur;
         }
 
-        public static void DeleteKey(RegistryKey parentKey, string keyToDeleteName, bool OSChecked = false){
-            if(!OSChecked) NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
-
+        public static void DeleteKey(RegistryKey parentKey, string keyToDeleteName){
             parentKey.DeleteSubKeyTree(keyToDeleteName);
         }
 
         public static RegistryKey CreateRegistryKeysTree(RegistryKey parentKey, string link){
-            NotSupportedOSException.CheckOS(NotSupportedOSException.Windows);
-
             var cur = parentKey;
             var keysNames = link.Split(@"\");
 
-            for(int i = 1; i < keysNames.Length; i++){
+            for(var i = 1; i < keysNames.Length; i++){
                 cur = cur.CreateSubKey(keysNames[i]);
             }
 

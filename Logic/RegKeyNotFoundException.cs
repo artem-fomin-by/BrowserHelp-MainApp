@@ -1,4 +1,4 @@
-﻿namespace Logic.Exceptions{
+﻿namespace Logic{
     public class RegKeyNotFoundException : Exception{
         public readonly string KeyName;
         public readonly string KeyFullName;
