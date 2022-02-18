@@ -6,9 +6,9 @@
         public const string BrowserLaunchCommandPath = @"\shell\open\command";
         public const string LaunchCommandValueName = "";
 
-        public const string DefaultBrowserKeyPath1 =
+        public const string HTTPDefaultBrowserKeyPath =
             @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Shell\Associations\URLAssociations\http\UserChoice";
-        public const string DefaultBrowserKeyPath2 =
+        public const string HTTPSDefaultBrowserKeyPath =
             @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Shell\Associations\URLAssociations\https\UserChoice";
 
         #endregion
