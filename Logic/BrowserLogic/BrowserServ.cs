@@ -17,19 +17,16 @@
 
         public static Browser[] FindBrowsers(string programKeyName){
             var BrowsersKey = WorkWithReg.GetKey(BrowsersKeyPath);
-            var BrowsersNames = BrowsersKey.GetSubKeyNames();
-            var FilteredBrowsersNames = BrowsersNames.Where(
-                x => !x.Equals(SystemBrowser) && !x.Equals(programKeyName));
+            var BrowsersNames = BrowsersKey
+                .GetSubKeyNames()
+                .Where(x => !x.Equals(SystemBrowser) && !x.Equals(programKeyName));
 
-            return FilteredBrowsersNames.Select(
-                x => new Browser(x,
-                    
-                    (string) WorkWithReg.GetKey(
-                            BrowserLaunchCommandPath,
-                            BrowsersKey.OpenSubKey(x)).GetValue(LaunchCommandValueName)
-                    )
-                
-                ).ToArray();
+            return BrowsersNames
+                .Select(x => new Browser(
+                    x, (string) WorkWithReg
+                        .GetKey(BrowserLaunchCommandPath, BrowsersKey.OpenSubKey(x))
+                        .GetValue(LaunchCommandValueName)))
+                .ToArray();
         }
     }
 }
