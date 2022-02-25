@@ -1,6 +1,3 @@
-using System.Diagnostics;
-
-using Logic;
 using Logic.BrowserLogic;
 using MainApp.AppWindows;
 using WinFormsLogic;
