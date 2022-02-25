@@ -17,30 +17,6 @@ namespace Logic{
 
         #endregion
 
-        public const string ProgIDsPath = @"HKEY_CLASSES_ROOT";
-
-        public static IEnumerable<RegistryKey> FromBottomToTopDFS(){
-            foreach(var startKey in StartKeys.Values){
-                foreach(var ret in FromBottomToTopDFS(startKey)){
-                    yield return ret;
-                }
-            }
-        }
-
-        private static IEnumerable<RegistryKey> FromBottomToTopDFS(RegistryKey cur){
-            var subKeyNames = cur.GetSubKeyNames();
-
-            if(subKeyNames.Length != 0){
-                foreach(var subKey in subKeyNames.Select(x => cur.OpenSubKey(x))){
-                    foreach(var ret in FromBottomToTopDFS(subKey)){
-                        yield return ret;
-                    }
-                }
-            }
-
-            yield return cur;
-        }
-
         public static RegistryKey GetKey(string link){
             return GetKey(link.Split(@"\"), link);
         }
@@ -71,21 +47,6 @@ namespace Logic{
                 if(cur == null)
                     throw new ArgumentException("Cannot find the RegistryKey",
                         new RegKeyNotFoundException(keysNames[i], link));
-            }
-
-            return cur;
-        }
-
-        public static void DeleteKey(RegistryKey parentKey, string keyToDeleteName){
-            parentKey.DeleteSubKeyTree(keyToDeleteName);
-        }
-
-        public static RegistryKey CreateRegistryKeysTree(RegistryKey parentKey, string link){
-            var cur = parentKey;
-            var keysNames = link.Split(@"\");
-
-            for(var i = 1; i < keysNames.Length; i++){
-                cur = cur.CreateSubKey(keysNames[i]);
             }
 
             return cur;
