@@ -44,7 +44,7 @@
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(158, 27);
             this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "No browsers are found";
+            this.textBox1.Text = "Browsers are not found";
             // 
             // NoBrowsersWindow
             // 

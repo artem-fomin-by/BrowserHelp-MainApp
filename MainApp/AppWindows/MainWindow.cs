@@ -1,7 +1,7 @@
 ﻿using WinFormsLogic;
 
 namespace MainApp.AppWindows{
-    public class MainWindow : Form{
+    internal class MainWindow : Form{
         #region STD_Indent_Constants
 
         private const int STD_BordersX_Indent = 30;

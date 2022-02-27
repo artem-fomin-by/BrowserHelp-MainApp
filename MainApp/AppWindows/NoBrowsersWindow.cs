@@ -1,5 +1,5 @@
 ﻿namespace MainApp.AppWindows{
-    public partial class NoBrowsersWindow : Form{
+    internal partial class NoBrowsersWindow : Form{
         public NoBrowsersWindow(string name){
             InitializeComponent();
 
