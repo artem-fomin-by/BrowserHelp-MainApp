@@ -1,0 +1,58 @@
+Windows Registry Editor Version 5.00
+
+; Infamous capabilities:
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\MainApp\Capabilities]
+"ApplicationDescription"="MainApp"
+"ApplicationIcon"="C:\\App\\MainApp.exe,0"
+"ApplicationName"="MainApp"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\MainApp\Capabilities\FileAssociations]
+".htm"="MainAppURL"
+".html"="MainAppURL"
+".shtml"="MainAppURL"
+".xht"="MainAppURL"
+".xhtml"="MainAppURL"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\MainApp\Capabilities\URLAssociations]
+"ftp"="MainAppURL"
+"http"="MainAppURL"
+"https"="MainAppURL"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Clients\StartMenuInternet\MainApp\Capabilities]
+"ApplicationDescription"="MainApp"
+"ApplicationIcon"="C:\\App\\MainApp.exe,0"
+"ApplicationName"="MainApp"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Clients\StartMenuInternet\MainApp\Capabilities\FileAssociations]
+".htm"="MainAppURL"
+".html"="MainAppURL"
+".shtml"="MainAppURL"
+".xht"="MainAppURL"
+".xhtml"="MainAppURL"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Clients\StartMenuInternet\MainApp\Capabilities\URLAssociations]
+"ftp"="MainAppURL"
+"http"="MainAppURL"
+"https"="MainAppURL"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Clients\StartMenuInternet\MainApp\shell\open\command]
+@="\"C:\\App\\MainApp.exe\""
+
+; Register to Default Programs
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\RegisteredApplications]
+"MainApp"="Software\\MainApp\\Capabilities"
+
+; MainAppURL HANDLER:
+
+[HKEY_LOCAL_MACHINE\Software\Classes\MainAppURL]
+@="MainApp Document"
+"FriendlyTypeName"="MainApp Document"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\MainAppURL\shell]
+
+[HKEY_LOCAL_MACHINE\Software\Classes\MainAppURL\shell\open]
+
+[HKEY_LOCAL_MACHINE\Software\Classes\MainAppURL\shell\open\command]
+@="\"C:\\App\\MainApp.exe\" \"%1\""
