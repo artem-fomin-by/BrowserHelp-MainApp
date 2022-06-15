@@ -1,25 +1,25 @@
-using Logic.BrowserLogic;
+using Logic;
 using MainApp.AppWindows;
 using WinFormsLogic;
 
-namespace MainApp{
-    public static class Program{
-        public const string AppName = "MainApp";
+namespace MainApp;
 
-        [STAThread]
-        public static void Main(string[] args){
+public static class Program{
+    public const string AppName = "MainApp";
 
-            ApplicationConfiguration.Initialize();
+    [STAThread]
+    public static void Main(string[] args){
 
-            var FoundBrowsers = BrowserServ.FindBrowsers(AppName).Select(
-                x => new BrowserButton(x)).ToArray();
+        ApplicationConfiguration.Initialize();
 
-            if(FoundBrowsers != null && FoundBrowsers.Length != 0){
-                Application.Run(new MainWindow(FoundBrowsers, AppName, args.Length > 0 ? args[0] : ""));
-            }
-            else{
-                Application.Run(new NoBrowsersWindow(AppName));
-            }
+        var FoundBrowsers = BrowserServ.FindBrowsers(AppName).Select(
+            x => new BrowserButton(x)).ToArray();
+
+        if(FoundBrowsers != null && FoundBrowsers.Length != 0){
+            Application.Run(new MainWindow(FoundBrowsers, AppName, args.Length > 0 ? args[0] : ""));
+        }
+        else{
+            Application.Run(new NoBrowsersWindow(AppName));
         }
     }
 }

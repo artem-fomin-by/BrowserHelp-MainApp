@@ -1,9 +1,9 @@
-﻿using Logic.BrowserLogic;
+﻿using Logic;
 
-namespace SystemConsoleApp{
-    public static class Program{
-        public static void Main(){
-            Console.WriteLine(Environment.CurrentDirectory);
-        }
+namespace SystemConsoleApp;
+
+public static class Program{
+    public static void Main(){
+        Console.WriteLine(Environment.CurrentDirectory);
     }
 }
