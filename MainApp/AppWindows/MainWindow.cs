@@ -19,15 +19,29 @@ internal class MainWindow : Form{
 
         InitializeComponent();
 
-        StartPosition = FormStartPosition.Manual;
-        Location = MousePosition;
-
         foreach(var button in Buttons){
             button.Click += (sender, args) => {
                 button.BrowserToLaunch.Launch(link);
                 Application.Exit();
             };
         }
+    }
+
+    private void InitPosition(int sizeX, int sizeY, int mouseX, int mouseY){
+        TopLevel = true;
+        StartPosition = FormStartPosition.Manual;
+
+        var bounds = Screen.GetBounds(Point.Empty);
+
+        var x = mouseX - (sizeX / 2);
+        if(x < 0) x = 0;
+        else if(mouseX > bounds.Right - sizeX) x = bounds.Right - sizeX - 1;
+
+        var y = mouseY - (sizeY / 2);
+        if(y < 0) y = 0;
+        else if(mouseY > bounds.Bottom - sizeY) y = bounds.Bottom - sizeY - 1;
+
+        Location = new Point(x, y);
     }
 
     protected override void Dispose(bool disposing){
@@ -44,24 +58,32 @@ internal class MainWindow : Form{
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(sizeX, sizeY);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
         Text = Name;
     }
 
     private void InitializeComponent(){
         SuspendLayout();
 
-        var x = STD_BordersX_Indent;
         var y = STD_BordersY_Indent;
         var i = 0;
 
-        foreach(var button in Buttons){
-            button.Initialize(x, y, i++, this);
+        var sizeX = STD_BordersX_Indent * 2 + BrowserButton.STD_SizeX;
+        var sizeY = STD_BordersY_Indent * 2 + BrowserButton.STD_SizeY +
+                    (Buttons.Length - 1) * (BrowserButton.STD_SizeY + STD_BFromB_Indent);
+
+        InitPosition(sizeX, sizeY, MousePosition.X, MousePosition.Y);
+
+        foreach (var button in Buttons){
+            button.Initialize(STD_BordersX_Indent, y, i++, this);
 
             y = y + BrowserButton.STD_SizeY + STD_BFromB_Indent;
         }
 
-        InitWindow(STD_BordersX_Indent * 2 + BrowserButton.STD_SizeX, y + STD_BordersY_Indent);
+        InitWindow(sizeX, sizeY);
 
         ResumeLayout(false);
+
+        TopLevel = true;
     }
 }
