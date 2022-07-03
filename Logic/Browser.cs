@@ -33,6 +33,7 @@ public class Browser
     public string Name { get; set; }
     public string LaunchCommand { get; set; }
     public string LaunchCommandArgs { get; set; }
+    public string[] Applications { get; set; }
 
     public Browser()
     {

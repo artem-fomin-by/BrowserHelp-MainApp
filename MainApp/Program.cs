@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using System.Text.Json;
-using System.Text.Json.Nodes;
 using Logic;
 using MainApp.AppWindows;
 using Microsoft.Extensions.Configuration;
@@ -11,8 +10,8 @@ public static class Program
 {
     public const string AppName = "MainApp";
 
-    static string ConfigurationFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName); 
-    static string ConfigurationFilePath = Path.Combine(ConfigurationFolderPath, "Configuration.json");
+    private static readonly string ConfigurationFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName);
+    private static readonly string ConfigurationFilePath = Path.Combine(ConfigurationFolderPath, "Configuration.json");
 
     [STAThread]
     public static void Main(string[] args)
@@ -21,8 +20,18 @@ public static class Program
 
         ApplicationConfiguration.Initialize();
 
-        // var parentProcess = ParentProcessUtilities.GetParentProcess();
+        var parentProcess = ParentProcessUtilities.GetParentProcess();
 
+        if (parentProcess != null)
+        {
+            var browser = config.FindBrowser(parentProcess.ProcessName);
+            if (browser != null)
+            {
+                browser.Launch(args.FirstOrDefault() ?? "");
+                return;
+            }
+        }
+        
 
         if (config.Browsers.Length != 0)
         {
@@ -66,7 +75,7 @@ public static class Program
             JsonSerializer.Serialize(configurationFile, new Config
             {
                 Browsers = browsers
-            });
+            }, new JsonSerializerOptions{WriteIndented = true});
         }
     }
 }

@@ -25,7 +25,7 @@ public struct ParentProcessUtilities
     /// Gets the parent process of the current process.
     /// </summary>
     /// <returns>An instance of the Process class.</returns>
-    public static Process GetParentProcess()
+    public static Process? GetParentProcess()
     {
         return GetParentProcess(Process.GetCurrentProcess().Handle);
     }
