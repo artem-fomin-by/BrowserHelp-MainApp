@@ -1,25 +1,73 @@
+using System.Diagnostics;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using Logic;
 using MainApp.AppWindows;
-using WinFormsLogic;
+using Microsoft.Extensions.Configuration;
 
 namespace MainApp;
 
-public static class Program{
+public static class Program
+{
     public const string AppName = "MainApp";
 
+    static string ConfigurationFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName); 
+    static string ConfigurationFilePath = Path.Combine(ConfigurationFolderPath, "Configuration.json");
+
     [STAThread]
-    public static void Main(string[] args){
+    public static void Main(string[] args)
+    {
+        var config = GetConfiguration();
 
         ApplicationConfiguration.Initialize();
 
-        var FoundBrowsers = BrowserServ.FindBrowsers(AppName).Select(
-            x => new BrowserButton(x)).ToArray();
+        // var parentProcess = ParentProcessUtilities.GetParentProcess();
 
-        if(FoundBrowsers != null && FoundBrowsers.Length != 0){
-            Application.Run(new MainWindow(FoundBrowsers, AppName, args.Length > 0 ? args[0] : ""));
+
+        if (config.Browsers.Length != 0)
+        {
+            Application.Run(new MainWindow(config.Browsers, args.Length > 0 ? args[0] : ""));
         }
-        else{
+        else
+        {
             Application.Run(new NoBrowsersWindow(AppName));
         }
     }
+
+    private static Config GetConfiguration()
+    {
+        EnsureConfiguration(ConfigurationFilePath);
+
+        var root = new ConfigurationManager()
+            .AddJsonFile(ConfigurationFilePath)
+            .Build();
+
+        var instance = new Config();
+        root.Bind(instance);
+        return instance;
+    }
+
+    private static void EnsureConfiguration(string configurationFilePath)
+    {
+        if (!Directory.Exists(ConfigurationFolderPath))
+        {
+            Directory.CreateDirectory(ConfigurationFolderPath);
+        }
+
+        if (File.Exists(configurationFilePath))
+        { 
+            return;
+        }   
+        
+        var browsers = Browser.FindBrowsers(AppName);
+        if (browsers.Length != 0)
+        {
+            using var configurationFile = File.Create(configurationFilePath);
+            JsonSerializer.Serialize(configurationFile, new Config
+            {
+                Browsers = browsers
+            });
+        }
+    }
 }
+

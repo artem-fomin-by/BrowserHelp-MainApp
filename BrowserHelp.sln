@@ -11,9 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Logic\Logic.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainProgramTests", "MainProgramTests\MainProgramTests.csproj", "{99DF774E-C669-4A16-A84B-3A25C096B437}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainApp", "MainApp\MainApp.csproj", "{02F0F1A8-CA79-4B24-B479-7AB864317903}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsLogic", "WinFormsLogic\WinFormsLogic.csproj", "{A7AAC488-9621-4936-856A-A230A9F784C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainApp", "MainApp\MainApp.csproj", "{02F0F1A8-CA79-4B24-B479-7AB864317903}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +35,6 @@ Global
 		{02F0F1A8-CA79-4B24-B479-7AB864317903}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02F0F1A8-CA79-4B24-B479-7AB864317903}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02F0F1A8-CA79-4B24-B479-7AB864317903}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A7AAC488-9621-4936-856A-A230A9F784C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7AAC488-9621-4936-856A-A230A9F784C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7AAC488-9621-4936-856A-A230A9F784C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7AAC488-9621-4936-856A-A230A9F784C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,7 +44,6 @@ Global
 		{77518E42-4C79-4AD1-8C62-4E7E46171985} = {86D54479-53A4-417A-BBD0-B6D4CD30E72B}
 		{99DF774E-C669-4A16-A84B-3A25C096B437} = {86D54479-53A4-417A-BBD0-B6D4CD30E72B}
 		{02F0F1A8-CA79-4B24-B479-7AB864317903} = {86D54479-53A4-417A-BBD0-B6D4CD30E72B}
-		{A7AAC488-9621-4936-856A-A230A9F784C8} = {86D54479-53A4-417A-BBD0-B6D4CD30E72B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A5FF5B5-13BE-4D0C-B78D-5D621DDACC21}

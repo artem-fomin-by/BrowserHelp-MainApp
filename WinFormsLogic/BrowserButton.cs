@@ -6,12 +6,13 @@ public class BrowserButton : Button{
     public const int STD_SizeX = 80;
     public const int STD_SizeY = 48;
 
-    public readonly Browser BrowserToLaunch;
 
-    public BrowserButton(Browser browser){
+    public delegate EventHandler BrowserButtonClick(BrowserButton button);
+
+    public BrowserButton(Browser browser, BrowserButtonClick click){
         Name = browser.Name;
         Text = browser.Name;
-        BrowserToLaunch = browser;
+        Click += click(this);
     }
 
     public void Initialize(int x, int y, int index, Form window){

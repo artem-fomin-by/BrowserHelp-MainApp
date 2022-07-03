@@ -1,89 +1,62 @@
-﻿using WinFormsLogic;
+﻿using Logic;
 
-namespace MainApp.AppWindows;
+namespace MainApp.AppWindows
+{
+    public partial class MainWindow : Form
+    {
+        public MainWindow(Browser[] browsers, string link)
+        {
+            InitializeComponent();
 
-internal class MainWindow : Form{
-    #region STD_Indent_Constants
+            
+            InitButtons(browsers, link);
 
-    private const int STD_BordersX_Indent = 30;
-    private const int STD_BordersY_Indent = 10;
-    private const int STD_BFromB_Indent = 10;
+            var bounds = Screen.FromPoint(MousePosition).WorkingArea;
+            
+            int mouseX = MousePosition.X;
+            int mouseY = MousePosition.Y;
 
-    #endregion
+            
+            int sizeX = Width;
+            var x = mouseX - (sizeX / 2);
 
-    private readonly BrowserButton[] Buttons;
+            x = Limit(x, bounds.X, bounds.Right - sizeX);
 
-    public MainWindow(BrowserButton[] buttons, string name, string link){
-        Buttons = buttons;
-        Name = name;
-
-        InitializeComponent();
-
-        foreach(var button in Buttons){
-            button.Click += (sender, args) => {
-                button.BrowserToLaunch.Launch(link);
-                Application.Exit();
-            };
+            int sizeY = Height;
+            var y = mouseY - (sizeY / 2);
+            y = Limit(y, bounds.Y, bounds.Bottom - sizeY);
+            
+            
+            Location =  new Point(x, y);
         }
-    }
 
-    private void InitPosition(int sizeX, int sizeY, int mouseX, int mouseY){
-        TopLevel = true;
-        StartPosition = FormStartPosition.Manual;
+        private static int Limit(int x, int min, int max)
+        {
+            return x < min ? min :
+                x > max ? max :
+                x;
+        }
 
-        var bounds = Screen.GetBounds(Point.Empty);
+        private void InitButtons(Browser[] browsers, string link)
+        {
+            flowLayoutPanel1.Controls.RemoveAt(0);
 
-        var x = mouseX - (sizeX / 2);
-        if(x < 0) x = 0;
-        else if(mouseX > bounds.Right - sizeX) x = bounds.Right - sizeX - 1;
+            foreach (var browser in browsers)
+            {
+                var button = new Button()
+                {
+                    Text = browser.Name,
+                };
 
-        var y = mouseY - (sizeY / 2);
-        if(y < 0) y = 0;
-        else if(mouseY > bounds.Bottom - sizeY) y = bounds.Bottom - sizeY - 1;
+                button.Click += (_, _) =>
+                {
+                    browser.Launch(link);
+                    Application.Exit();
 
-        Location = new Point(x, y);
-    }
+                };
 
-    protected override void Dispose(bool disposing){
-        if(Buttons != null){
-            foreach(var button in Buttons){
-                button.Dispose();
+                flowLayoutPanel1.Controls.Add(button);
             }
         }
-
-        base.Dispose(disposing);
-    }
-
-    private void InitWindow(int sizeX, int sizeY){
-        AutoScaleDimensions = new SizeF(8F, 20F);
-        AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(sizeX, sizeY);
-        FormBorderStyle = FormBorderStyle.FixedSingle;
-        Text = Name;
-    }
-
-    private void InitializeComponent(){
-        SuspendLayout();
-
-        var y = STD_BordersY_Indent;
-        var i = 0;
-
-        var sizeX = STD_BordersX_Indent * 2 + BrowserButton.STD_SizeX;
-        var sizeY = STD_BordersY_Indent * 2 + BrowserButton.STD_SizeY +
-                    (Buttons.Length - 1) * (BrowserButton.STD_SizeY + STD_BFromB_Indent);
-
-        InitPosition(sizeX, sizeY, MousePosition.X, MousePosition.Y);
-
-        foreach (var button in Buttons){
-            button.Initialize(STD_BordersX_Indent, y, i++, this);
-
-            y = y + BrowserButton.STD_SizeY + STD_BFromB_Indent;
-        }
-
-        InitWindow(sizeX, sizeY);
-
-        ResumeLayout(false);
-
-        TopLevel = true;
     }
 }

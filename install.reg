@@ -4,7 +4,7 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\MainApp\Capabilities]
 "ApplicationDescription"="MainApp"
-"ApplicationIcon"="C:\\App\\MainApp.exe,0"
+"ApplicationIcon"="C:\\bin\\MainApp\\MainApp.exe,0"
 "ApplicationName"="MainApp"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\MainApp\Capabilities\FileAssociations]
@@ -21,7 +21,7 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Clients\StartMenuInternet\MainApp\Capabilities]
 "ApplicationDescription"="MainApp"
-"ApplicationIcon"="C:\\App\\MainApp.exe,0"
+"ApplicationIcon"="C:\\bin\\MainApp\\MainApp.exe,0"
 "ApplicationName"="MainApp"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Clients\StartMenuInternet\MainApp\Capabilities\FileAssociations]
@@ -37,7 +37,7 @@ Windows Registry Editor Version 5.00
 "https"="MainAppURL"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Clients\StartMenuInternet\MainApp\shell\open\command]
-@="\"C:\\App\\MainApp.exe\""
+@="\"C:\\bin\\MainApp\\MainApp.exe\""
 
 ; Register to Default Programs
 
@@ -55,4 +55,4 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\Software\Classes\MainAppURL\shell\open]
 
 [HKEY_LOCAL_MACHINE\Software\Classes\MainAppURL\shell\open\command]
-@="\"C:\\App\\MainApp.exe\" \"%1\""
+@="\"C:\\bin\\MainApp\\MainApp.exe\" \"%1\""
