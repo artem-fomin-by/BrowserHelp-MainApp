@@ -4,7 +4,7 @@ namespace MainApp.AppWindows
 {
     public partial class MainWindow : Form
     {
-        public MainWindow(Browser[] browsers, string link)
+        public MainWindow(Browser[] browsers, string link, string? processName)
         {
             InitializeComponent();
 
@@ -25,9 +25,9 @@ namespace MainApp.AppWindows
             int sizeY = Height;
             var y = mouseY - (sizeY / 2);
             y = Limit(y, bounds.Y, bounds.Bottom - sizeY);
-            
-            
+
             Location =  new Point(x, y);
+            label1.Text = processName;
         }
 
         private static int Limit(int x, int min, int max)
@@ -43,7 +43,7 @@ namespace MainApp.AppWindows
 
             foreach (var browser in browsers)
             {
-                var button = new Button()
+                var button = new Button
                 {
                     Text = browser.Name,
                 };

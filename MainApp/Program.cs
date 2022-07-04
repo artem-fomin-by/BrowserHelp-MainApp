@@ -35,7 +35,7 @@ public static class Program
 
         if (config.Browsers.Length != 0)
         {
-            Application.Run(new MainWindow(config.Browsers, args.Length > 0 ? args[0] : ""));
+            Application.Run(new MainWindow(config.Browsers, args.Length > 0 ? args[0] : "", parentProcess?.ProcessName));
         }
         else
         {
