@@ -21,26 +21,39 @@ public static class Program
         ApplicationConfiguration.Initialize();
 
         var parentProcess = ParentProcessUtilities.GetParentProcess();
+        var link = args.Length > 0 ? args[0] : null;
 
+        var browser = ChooseBrowser(link, parentProcess, config);
+        if (browser != null)
+        {
+            browser.Launch(args.FirstOrDefault() ?? "");
+        }
+        else
+        {
+
+
+            if (config.Browsers.Length != 0)
+            {
+                Application.Run(new MainWindow(config.Browsers, link, parentProcess?.ProcessName));
+            }
+            else
+            {
+                Application.Run(new NoBrowsersWindow(AppName));
+            }
+        }
+    }
+
+    private static Browser? ChooseBrowser(string? link, Process? parentProcess, Config config)
+    {
         if (parentProcess != null)
         {
             var browser = config.FindBrowser(parentProcess.ProcessName);
             if (browser != null)
             {
-                browser.Launch(args.FirstOrDefault() ?? "");
-                return;
+                return browser;
             }
         }
-        
-
-        if (config.Browsers.Length != 0)
-        {
-            Application.Run(new MainWindow(config.Browsers, args.Length > 0 ? args[0] : "", parentProcess?.ProcessName));
-        }
-        else
-        {
-            Application.Run(new NoBrowsersWindow(AppName));
-        }
+        return null;
     }
 
     private static Config GetConfiguration()

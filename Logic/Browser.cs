@@ -17,16 +17,20 @@ public class Browser
 
     public static Browser[] FindBrowsers(string programKeyName)
     {
-        var BrowsersKey = WorkWithReg.GetKey(BrowsersKeyPath);
-        var BrowsersNames = BrowsersKey
+        using var browsersKey = WorkWithReg.GetKey(BrowsersKeyPath);
+        var browsersNames = browsersKey
             .GetSubKeyNames()
             .Where(x => !x.Equals(SystemBrowser) && !x.Equals(programKeyName));
 
-        return BrowsersNames
-            .Select(x => new Browser(
-                x, (string)WorkWithReg
-                    .GetKey(BrowserLaunchCommandPath, BrowsersKey.OpenSubKey(x))
-                    .GetValue(LaunchCommandValueName)))
+        return browsersNames
+            .Select(x => new Browser
+            {
+                Name = x,
+                LaunchCommand =
+                    (string)WorkWithReg
+                        .GetKey(BrowserLaunchCommandPath, browsersKey.OpenSubKey(x))
+                        .GetValue(LaunchCommandValueName)
+            })
             .ToArray();
     }
 
@@ -34,18 +38,6 @@ public class Browser
     public string LaunchCommand { get; set; }
     public string LaunchCommandArgs { get; set; }
     public string[] Applications { get; set; }
-
-    public Browser()
-    {
-
-    }
-
-    public Browser(string name, string launchCommand, string args = "")
-    {
-        Name = name;
-        LaunchCommand = launchCommand;
-        LaunchCommandArgs = args;
-    }
 
     public void Launch(string link = "")
     {

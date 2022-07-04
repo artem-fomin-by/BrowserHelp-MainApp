@@ -23,8 +23,7 @@ public static class WorkWithReg{
     }
 
     private static RegistryKey GetKey(string[] keysNames, string link, int n_indexesToIgnore = 0){
-        RegistryKey? cur;
-        if(!StartKeys.TryGetValue(keysNames[0], out cur)){
+        if(!StartKeys.TryGetValue(keysNames[0], out var cur)){
             throw new ArgumentException("Cannot find the RegistryKey", nameof(keysNames),
                 new RegKeyNotFoundException(keysNames[0], link));
         }
