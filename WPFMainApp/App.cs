@@ -7,7 +7,7 @@ using System.Windows;
 using Logic;
 using Microsoft.Extensions.Configuration;
 
-namespace WPFMainApp;
+namespace MainApp;
 
 public class App : Application
 {
