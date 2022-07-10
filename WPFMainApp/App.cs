@@ -1,25 +1,27 @@
+﻿using System;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Text.Json;
+using System.Windows;
 using Logic;
-using MainApp.AppWindows;
 using Microsoft.Extensions.Configuration;
 
 namespace MainApp;
 
-public static class Program
+public class App : Application
 {
     public const string AppName = "MainApp";
 
-    private static readonly string ConfigurationFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName);
+    private static readonly string ConfigurationFolderPath =
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName);
+
     private static readonly string ConfigurationFilePath = Path.Combine(ConfigurationFolderPath, "Configuration.json");
 
     [STAThread]
     public static void Main(string[] args)
     {
         var config = GetConfiguration();
-
-        ApplicationConfiguration.Initialize();
-
         var parentProcess = ParentProcessUtilities.GetParentProcess();
         var link = args.Length > 0 ? args[0] : null;
 
@@ -30,29 +32,30 @@ public static class Program
         }
         else
         {
-
+            var app = new App();
 
             if (config.Browsers.Length != 0)
             {
-                Application.Run(new MainWindow(config.Browsers, link, parentProcess?.ProcessName));
+                app.Run(new MainWindow(app, AppName, config.Browsers, link));
             }
             else
             {
-                Application.Run(new NoBrowsersWindow(AppName));
+                app.Run(new NoBrowsersWindow(AppName));
             }
         }
     }
 
     private static Browser? ChooseBrowser(string? link, Process? parentProcess, Config config)
     {
-        if (parentProcess != null)
+        if(parentProcess != null)
         {
             var browser = config.FindBrowser(parentProcess.ProcessName);
-            if (browser != null)
+            if(browser != null)
             {
                 return browser;
             }
         }
+
         return null;
     }
 
@@ -77,10 +80,10 @@ public static class Program
         }
 
         if (File.Exists(configurationFilePath))
-        { 
+        {
             return;
-        }   
-        
+        }
+
         var browsers = Browser.FindBrowsers(AppName);
         if (browsers.Length != 0)
         {
@@ -88,8 +91,7 @@ public static class Program
             JsonSerializer.Serialize(configurationFile, new Config
             {
                 Browsers = browsers
-            }, new JsonSerializerOptions{WriteIndented = true});
+            }, new JsonSerializerOptions { WriteIndented = true });
         }
     }
 }
-
