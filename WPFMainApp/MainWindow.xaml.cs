@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -6,45 +7,37 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using Logic;
 
-namespace WPFMainApp;
-
+namespace MainApp;
 
 public partial class MainWindow : Window
 {
-    private readonly Application ParentApp;
-    private string Link;
+    private readonly Application _parentApp;
+    private readonly string _link;
 
-    private const double Indent = 2.0;
-    private const double LeftIndent = 13.0;
-    private const double TopIndent = 36.0;
+    private const double HorizontalIndent = 8.0;
+    private const double VerticalIndent = 2.0;
+    private const double MinimumWidth = 80.0;
 
     public MainWindow(Application app, string appName, Browser[] browsers, string? link)
     {
-        ParentApp = app;
-        Link = link ?? "";
+        _parentApp = app;
+        _link = link ?? "";
 
         InitializeComponent();
 
         Title = appName;
         FontSize = 12.0;
 
-        var sizes = new[] {new[] {link ?? ""}, browsers.Select(x => x.Name)}
-            .SelectMany(x => x)
+        var sizes = browsers.Select(x => x.Name)
             .Select(x => MeasureString(x, FontFamily, FontStyle, FontWeight, FontStretch, FontSize))
             .ToList();
-        var maxWidth = sizes.Select(x => x.Width).Max() + (Indent * 2);
-        var maxHeight = sizes.Select(x => x.Height).Max() + (Indent * 2);
+        var maxWidth = sizes.Select(x => x.Width).Max();
+        var width = Math.Max(maxWidth, MinimumWidth) + (HorizontalIndent * 2);
+        var maxHeight = sizes.Select(x => x.Height).Max() + (VerticalIndent * 2);
 
-        (LinkTextBox.Width, LinkTextBox.Height) = (maxWidth, maxHeight);
-        LinkTextBox.Text = Link;
-        LinkTextBox.TextChanged += LinkTextBoxTextChanged;
+        InitButtons(browsers, width, maxHeight);
 
-        InitButtons(browsers, maxWidth, maxHeight);
-
-        Width = LinkTextBox.Width + LeftIndent;
-        Height = ButtonsStackPanel.Height + LinkTextBox.Height + TopIndent;
-
-        AdjustInitPosition(maxHeight);
+        LinkLabel.Content = link;
     }
 
     private static Point ConvertCords(Point cords, Window window, int defaultXDPI = 96, int defaultYDPI = 96)
@@ -56,48 +49,54 @@ public partial class MainWindow : Window
         return new Point(x, y);
     }
 
-    private void AdjustInitPosition(double h)
+    private void AdjustInitPosition()
     {
+        var actualMousePosition = GetMousePosition();
+
+        Left = actualMousePosition.X - (ActualWidth / 2);
+
+        var button = (Button)ButtonsStackPanel.Children[0];
+
+        Top = actualMousePosition.Y - SystemParameters.WindowCaptionHeight - button.Height;
+    }
+
+    private Point GetMousePosition()
+    {
+
         var mousePosition = new Interop.Win32Point();
         Interop.GetCursorPos(ref mousePosition);
         var mousePositionPoint = new Point(mousePosition.X, mousePosition.Y);
         var actualMousePosition = ConvertCords(mousePositionPoint, this);
-        
-        Left = actualMousePosition.X - (Width / 2);
-        Top = actualMousePosition.Y - (h * 1.5 + TopIndent);
+        return actualMousePosition;
     }
 
     private void InitButtons(Browser[] browsers, double maxWidth, double maxHeight)
     {
         ButtonsStackPanel.Width = maxWidth;
-        ButtonsStackPanel.Height = browsers.Length * maxHeight;
 
-        foreach(var browser in browsers)
+        for (var index = 0; index < browsers.Length; index++)
         {
+            var browser = browsers[index];
             var button = new Button
             {
                 Content = browser.Name,
                 Width = maxWidth,
-                Height = maxHeight
+                Height = maxHeight,
+                IsDefault = index == 0,
+                Margin = new Thickness(0, VerticalIndent, 0, 0)
             };
 
             button.Click += (_, _) =>
             {
-                browser.Launch(Link);
-                ParentApp.Shutdown();
+                browser.Launch(_link);
+                _parentApp.Shutdown();
             };
 
             ButtonsStackPanel.Children.Add(button);
         }
     }
 
-    private static Size MeasureString(
-        string candidate, 
-        FontFamily fontFamily, 
-        FontStyle fontStyle, 
-        FontWeight fontWeight, 
-        FontStretch fontStretch,
-        double fontSize)
+    private static Size MeasureString(string candidate, FontFamily fontFamily, FontStyle fontStyle, FontWeight fontWeight, FontStretch fontStretch, double fontSize)
     {
         var formattedText = new FormattedText(
             candidate,
@@ -112,8 +111,8 @@ public partial class MainWindow : Window
         return new Size(formattedText.Width, formattedText.Height);
     }
 
-    private void LinkTextBoxTextChanged(object? sender, TextChangedEventArgs e)
+    private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
     {
-        Link = LinkTextBox.Text;
+        AdjustInitPosition();
     }
 }
