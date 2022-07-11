@@ -11,14 +11,18 @@ namespace MainApp;
 
 public partial class MainWindow : Window
 {
-    private readonly Application _parentApp;
+    private readonly App _parentApp;
     private readonly string _link;
 
     private const double HorizontalIndent = 8.0;
     private const double VerticalIndent = 2.0;
+    private const double InternalIndent = 2.0;
     private const double MinimumWidth = 80.0;
 
-    public MainWindow(Application app, string appName, Browser[] browsers, string? link)
+    internal Browser? _selectedBrowser = null;
+    internal int? _selectedBrowserIndex = null;
+
+    public MainWindow(App app, string appName, Browser[] browsers, string? link)
     {
         _parentApp = app;
         _link = link ?? "";
@@ -35,7 +39,7 @@ public partial class MainWindow : Window
         var width = Math.Max(maxWidth, MinimumWidth) + (HorizontalIndent * 2);
         var maxHeight = sizes.Select(x => x.Height).Max() + (VerticalIndent * 2);
 
-        InitButtons(browsers, width, maxHeight);
+        InitControls(browsers, width, maxHeight);
 
         LinkLabel.Content = link;
     }
@@ -55,7 +59,8 @@ public partial class MainWindow : Window
 
         Left = actualMousePosition.X - (ActualWidth / 2);
 
-        var button = (Button)ButtonsStackPanel.Children[0];
+        var selectionPanel = (StackPanel)BrowsersStackPanel.Children[0];
+        var button = (Button)selectionPanel.Children[1];
 
         Top = actualMousePosition.Y - SystemParameters.WindowCaptionHeight - button.Height;
     }
@@ -70,30 +75,52 @@ public partial class MainWindow : Window
         return actualMousePosition;
     }
 
-    private void InitButtons(Browser[] browsers, double maxWidth, double maxHeight)
+    private void InitControls(Browser[] browsers, double maxWidth, double maxHeight)
     {
-        ButtonsStackPanel.Width = maxWidth;
-
-        for (var index = 0; index < browsers.Length; index++)
+        for(var index = 0; index < browsers.Length; index++)
         {
-            var browser = browsers[index];
-            var button = new Button
-            {
-                Content = browser.Name,
-                Width = maxWidth,
-                Height = maxHeight,
-                IsDefault = index == 0,
-                Margin = new Thickness(0, VerticalIndent, 0, 0)
-            };
+            var selectionPanel =
+                CreateBrowserSelectionPanel(browsers[index], index, index == 0, maxWidth, maxHeight);
 
-            button.Click += (_, _) =>
-            {
-                browser.Launch(_link);
-                _parentApp.Shutdown();
-            };
-
-            ButtonsStackPanel.Children.Add(button);
+            BrowsersStackPanel.Children.Add(selectionPanel);
         }
+    }
+
+    private StackPanel CreateBrowserSelectionPanel
+        (Browser browser, int index, bool isDefault, double width, double height)
+    {
+        var res = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            VerticalAlignment = VerticalAlignment.Center,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            Margin = new Thickness(0, VerticalIndent, 0, 0)
+    };
+
+        var checkBox = new BrowserSelectionCheckBox(this, browser, index);
+        checkBox.VerticalAlignment = VerticalAlignment.Center;
+        checkBox.Margin = new Thickness(0, 0, InternalIndent, 0);
+
+        var button = new Button
+        {
+            Content = browser.Name,
+            Width = width,
+            Height = height,
+            IsDefault = isDefault,
+        };
+
+        button.Click += (_, _) =>
+        {
+            browser.Launch(_link);
+            _parentApp.Shutdown();
+        };
+
+        res.Height = height;
+        res.Children.Add(checkBox);
+        res.Children.Add(button);
+        res.Width = checkBox.Width + InternalIndent + button.Width;
+
+        return res;
     }
 
     private static Size MeasureString(string candidate, FontFamily fontFamily, FontStyle fontStyle, FontWeight fontWeight, FontStretch fontStretch, double fontSize)
@@ -114,5 +141,45 @@ public partial class MainWindow : Window
     private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
     {
         AdjustInitPosition();
+    }
+}
+
+class BrowserSelectionCheckBox : CheckBox
+{
+    private readonly MainWindow _parent;
+    private readonly Browser Browser;
+    private readonly int Index;
+
+    public BrowserSelectionCheckBox(MainWindow parent, Browser browser, int index)
+    {
+        Width = 16;
+        Height = 16;
+
+        _parent = parent;
+        Browser = browser;
+        Index = index;
+
+        Checked += OnChecked_EventHandler;
+        Unchecked += OnUnchecked_EventHandler;
+    }
+
+    private void OnChecked_EventHandler(object sender, RoutedEventArgs e)
+    {
+        if(_parent._selectedBrowserIndex != null)
+        {
+            var selectionPanel = (StackPanel)
+                _parent.BrowsersStackPanel.Children[(int)_parent._selectedBrowserIndex];
+            var previousCheckedBox = (BrowserSelectionCheckBox)selectionPanel.Children[0];
+            previousCheckedBox.IsChecked = false;
+        }
+
+        _parent._selectedBrowser = Browser;
+        _parent._selectedBrowserIndex = Index;
+    }
+
+    private void OnUnchecked_EventHandler(object sender, RoutedEventArgs e)
+    {
+        _parent._selectedBrowser = null;
+        _parent._selectedBrowserIndex = null;
     }
 }

@@ -11,10 +11,14 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto" MinHeight="0"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Name="ButtonsStackPanel"
+        <StackPanel Name="BrowsersStackPanel"
                     Grid.Row="0"
                     Height="Auto"
-                    Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="2,0,2,0" />
+                    Orientation="Vertical" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top" 
+                    Margin="2,0,2,0" 
+                    />
         <Label Name="LinkLabel" Grid.Row="1" MaxWidth="300" FontSize="10"></Label>
     </Grid>
 </Window>
