@@ -17,10 +17,8 @@ internal class WildcardTests
     [TearDown]
     public void TearDown()
     {
-        if(HasPreviousTestPassed)
-        {
-            HasPreviousTestPassed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed;
-        }
+        HasPreviousTestPassed = 
+            HasPreviousTestPassed && TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed;
     }
 
     [Test, Order(1)]
