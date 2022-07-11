@@ -47,16 +47,7 @@ public class App : Application
 
     private static Browser? ChooseBrowser(string? link, Process? parentProcess, Config config)
     {
-        if(parentProcess != null)
-        {
-            var browser = config.FindBrowser(parentProcess.ProcessName);
-            if(browser != null)
-            {
-                return browser;
-            }
-        }
-
-        return null;
+        return config.FindBrowser(link ?? "", parentProcess?.ProcessName);
     }
 
     private static Config GetConfiguration()

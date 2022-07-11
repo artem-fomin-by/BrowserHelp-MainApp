@@ -4,7 +4,6 @@ namespace Logic;
 
 public class Browser
 {
-
     #region RegistryKeyPathes
 
     public const string BrowsersKeyPath = @"HKEY_LOCAL_MACHINE\SOFTWARE\Clients\StartMenuInternet";
@@ -37,10 +36,16 @@ public class Browser
     public string Name { get; set; }
     public string LaunchCommand { get; set; }
     public string LaunchCommandArgs { get; set; }
-    public string[] Applications { get; set; }
+    public string[]? Applications { get; set; }
+    public string[]? UrlPatterns { get; set; }
 
     public void Launch(string link = "")
     {
         Process.Start(LaunchCommand, $"{link} {LaunchCommandArgs}");
+    }
+
+    public bool IsLinkMatch(string link)
+    {
+        return UrlPatterns?.Select(WildcardUtilities.WildcardToRegex).Any(x => x.IsMatch(link)) == true;
     }
 }
