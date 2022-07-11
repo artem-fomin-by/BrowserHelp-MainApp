@@ -46,6 +46,9 @@ public class Browser
 
     public bool IsLinkMatch(string link)
     {
-        return UrlPatterns?.Select(WildcardUtilities.WildcardToRegex).Any(x => x.IsMatch(link)) == true;
+        string linkToCheck = link;
+        if(!link.EndsWith('/')) linkToCheck = link + '/';
+
+        return UrlPatterns?.Select(WildcardUtilities.WildcardToRegex).Any(x => x.IsMatch(linkToCheck)) == true;
     }
 }

@@ -37,8 +37,10 @@ internal class WildcardTests
 
         var link1 = @"https://www.youtube.com/watch?v=cZhD6JNM3Go";
         var link2 = @"https://www.youtube.com/";
+        var link3 = @"https://www.youtube.com";
 
         Assert.That(browser.IsLinkMatch(link1));
         Assert.That(browser.IsLinkMatch(link2));
+        Assert.That(browser.IsLinkMatch(link3));
     }
 }
