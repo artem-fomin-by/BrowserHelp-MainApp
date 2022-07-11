@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -18,25 +19,27 @@ public class App : Application
 
     private static readonly string ConfigurationFilePath = Path.Combine(ConfigurationFolderPath, "Configuration.json");
 
+    private static readonly Process? ParentProcess = ParentProcessUtilities.GetParentProcess();
+    private static Config Configuration;
+
     [STAThread]
     public static void Main(string[] args)
     {
-        var config = GetConfiguration();
-        var parentProcess = ParentProcessUtilities.GetParentProcess();
-        var link = args.Length > 0 ? args[0] : null;
+        Configuration = GetConfiguration();
+        var link = args.FirstOrDefault();
 
-        var browser = ChooseBrowser(link, parentProcess, config);
+        var browser = ChooseBrowser(link, ParentProcess, Configuration);
         if (browser != null)
         {
-            browser.Launch(args.FirstOrDefault() ?? "");
+            browser.Launch(link ?? "");
         }
         else
         {
             var app = new App();
 
-            if (config.Browsers.Length != 0)
+            if (Configuration.Browsers.Length != 0)
             {
-                app.Run(new MainWindow(app, AppName, config.Browsers, link));
+                app.Run(new MainWindow(app, AppName, Configuration.Browsers, link));
             }
             else
             {
@@ -93,5 +96,23 @@ public class App : Application
                 Browsers = browsers
             }, new JsonSerializerOptions { WriteIndented = true });
         }
+    }
+
+    public void End(Browser? browser = null)
+    {
+        if(browser == null || ParentProcess == null)
+        {
+            Shutdown();
+            return;
+        }
+
+        if(browser.Applications == null)
+        {
+            browser.Applications = new List<string>();
+        }
+
+        browser.Applications.Add(ParentProcess.ProcessName);
+        Configuration.Deserialize(ConfigurationFilePath);
+        Shutdown();
     }
 }

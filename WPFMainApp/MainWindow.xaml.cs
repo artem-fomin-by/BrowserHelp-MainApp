@@ -112,7 +112,7 @@ public partial class MainWindow : Window
         button.Click += (_, _) =>
         {
             browser.Launch(_link);
-            _parentApp.Shutdown();
+            _parentApp.End(_selectedBrowser);
         };
 
         res.Height = height;
@@ -123,7 +123,14 @@ public partial class MainWindow : Window
         return res;
     }
 
-    private static Size MeasureString(string candidate, FontFamily fontFamily, FontStyle fontStyle, FontWeight fontWeight, FontStretch fontStretch, double fontSize)
+    private static Size MeasureString(
+        string candidate, 
+        FontFamily fontFamily, 
+        FontStyle fontStyle, 
+        FontWeight fontWeight, 
+        FontStretch fontStretch, 
+        double fontSize
+        )
     {
         var formattedText = new FormattedText(
             candidate,
