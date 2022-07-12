@@ -1,27 +1,12 @@
 ﻿using NUnit.Framework;
-using NUnit.Framework.Interfaces;
 using Logic;
 
 namespace MainProgramTests;
 
 internal class WildcardTests
 {
-    private static bool HasPreviousTestPassed = true;
 
-    [SetUp]
-    public void SetUp()
-    {
-        Assume.That(HasPreviousTestPassed, Is.True);
-    }
-
-    [TearDown]
-    public void TearDown()
-    {
-        HasPreviousTestPassed = 
-            HasPreviousTestPassed && TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed;
-    }
-
-    [Test, Order(1)]
+    [Test]
     public void ConvertingTest()
     {
         var regexPattern = @".*\.youtube\.com/.*";
@@ -30,17 +15,20 @@ internal class WildcardTests
         Assert.AreEqual(regexPattern, wildcardRegex.ToString());
     }
 
-    [Test, Order(2)]
-    public void MatchTest()
+    [TestCase("https://www.youtube.com/watch?v=cZhD6JNM3Go", "*.youtube.com/*", ExpectedResult = true)]
+    [TestCase("https://www.youtube.com/", "*.youtube.com/*", ExpectedResult = true)]
+    [TestCase("https://www.youtube.com", "*.youtube.com/*", ExpectedResult = true)]
+    [TestCase("https://www.youtube.com/watch?v=cZhD6JNM3Go", "*.youtube.com", ExpectedResult = true)]
+    [TestCase("https://www.youtube.com/", "*.youtube.com", ExpectedResult = true)]
+    [TestCase("https://www.youtube.com", "*.youtube.com", ExpectedResult = true)]
+    [TestCase("https://www.youtube.com/watch?v=cZhD6JNM3Go", "*.youtube.com/", ExpectedResult = false)]
+    [TestCase("https://www.youtube.com/watch?v=cZhD6JNM3Go", ".youtube.com/", ExpectedResult = false)]
+    [TestCase("https://www.youtube.com/", ".youtube.com/", ExpectedResult = false)]
+    [TestCase("https://www.youtube.com", ".youtube.com/", ExpectedResult = false)]
+    public bool MatchTest(string link, string pattern)
     {
-        var browser = new Browser{ UrlPatterns = new[]{ @"*.youtube.com/*" } };
+        var browser = new Browser{ UrlPatterns = new[]{ pattern } };
 
-        var link1 = @"https://www.youtube.com/watch?v=cZhD6JNM3Go";
-        var link2 = @"https://www.youtube.com/";
-        var link3 = @"https://www.youtube.com";
-
-        Assert.That(browser.IsLinkMatch(link1));
-        Assert.That(browser.IsLinkMatch(link2));
-        Assert.That(browser.IsLinkMatch(link3));
+        return browser.IsLinkMatch(link);
     }
 }
