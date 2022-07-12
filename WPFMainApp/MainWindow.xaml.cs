@@ -71,8 +71,10 @@ public partial class MainWindow : Window
 
     private void InitControls(Browser[] browsers, double maxWidth, double maxHeight)
     {
-        DefaultBrowserCheckBox.Content =
-            string.Format("Always open links from \"{0}\" in selected browser", App.ParentProcess?.ProcessName);
+        DefaultBrowserCheckBox.Content = string.Format(
+            "Always open links from \"{0}\" in selected browser", 
+            App.ParentProcess?.ProcessName ?? ""
+            );
 
         ButtonsStackPanel.Width = maxWidth;
 
@@ -110,7 +112,7 @@ public partial class MainWindow : Window
         BrowsersSelectionExpander.Content = expanderStackPanel;
 
         
-        if(true) ((Grid)Content).Children.RemoveAt(2);
+        if(App.ParentProcess == null) ((Grid)Content).Children.RemoveAt(2);
     }
 
     private static Size MeasureString(string candidate, FontFamily fontFamily, FontStyle fontStyle, FontWeight fontWeight, FontStretch fontStretch, double fontSize)
