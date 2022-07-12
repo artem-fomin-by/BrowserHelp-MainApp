@@ -5,16 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="MainWindow" WindowStyle="ToolWindow" ResizeMode="NoResize"
-        SizeToContent="WidthAndHeight" Topmost="True" Loaded="MainWindow_OnLoaded">
+        SizeToContent="WidthAndHeight" Topmost="True" Loaded="MainWindow_OnLoaded" Height="Auto">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto" MinHeight="0"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Name="ButtonsStackPanel"
                     Grid.Row="0"
                     Height="Auto"
-                    Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="2,0,2,0" />
+                    Orientation="Vertical" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top" 
+                    Margin="2,0,2,0"
+                    />
         <Label Name="LinkLabel" Grid.Row="1" MaxWidth="300" FontSize="10"></Label>
+        <StackPanel Grid.Row="2" 
+                    Margin="2,2,2,2"
+                    Height="Auto"
+                    Width="Auto"
+                    HorizontalAlignment ="Left"
+                    VerticalAlignment="Top"
+        >
+            <Expander Name = "BrowsersSelectionExpander"
+                Height="Auto" 
+                Header="Selection"
+                >
+                <Grid Background="#FFC3C3C3"/>
+            </Expander>
+            <CheckBox Name ="DefaultBrowserCheckBox"
+                Content="Always open links from " 
+                FontSize="12.0"
+                />
+        </StackPanel>
     </Grid>
 </Window>

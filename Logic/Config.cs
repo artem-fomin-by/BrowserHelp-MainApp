@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace Logic;
 
 public class Config
@@ -16,5 +18,15 @@ public class Config
         }
 
         return null;
+    }
+
+    public void Deserialize(string configurationFilePath)
+    {
+        using var configurationFile = File.Open(configurationFilePath, FileMode.Open, FileAccess.Write);
+        JsonSerializer.Serialize(
+            configurationFile, 
+            this, 
+            new JsonSerializerOptions { WriteIndented = true }
+            );
     }
 }

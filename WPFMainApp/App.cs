@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Windows;
-using Logic;
 using Microsoft.Extensions.Configuration;
+using Logic;
 
 namespace MainApp;
 
@@ -18,14 +19,17 @@ public class App : Application
 
     private static readonly string ConfigurationFilePath = Path.Combine(ConfigurationFolderPath, "Configuration.json");
 
+    private static Process? _parentProcess;
+    private static Config _configuration;
+
     [STAThread]
     public static void Main(string[] args)
     {
-        var config = GetConfiguration(ConfigurationFilePath, ConfigurationFolderPath);
-        var parentProcess = ParentProcessUtilities.GetParentProcess();
+        _configuration = GetConfiguration(ConfigurationFilePath, ConfigurationFolderPath);
+        _parentProcess = ParentProcessUtilities.GetParentProcess();
         var link = args.Length > 0 ? args[0] : null;
 
-        var browser = ChooseBrowser(link, parentProcess, config);
+        var browser = ChooseBrowser(link, _parentProcess, _configuration);
         if (browser != null)
         {
             browser.Launch(args.FirstOrDefault() ?? "");
@@ -34,9 +38,9 @@ public class App : Application
         {
             var app = new App();
 
-            if (config.Browsers.Length != 0)
+            if (_configuration.Browsers.Length != 0)
             {
-                app.Run(new MainWindow(app, AppName, config.Browsers, link));
+                app.Run(new MainWindow(app, AppName, _configuration.Browsers, link));
             }
             else
             {
@@ -85,4 +89,20 @@ public class App : Application
             }, new JsonSerializerOptions { WriteIndented = true });
         }
     }
+
+    public void End(Browser selectedBrowser)
+    {
+        if(_parentProcess == null)
+        {
+            Shutdown();
+            return;
+        }
+
+        selectedBrowser.Applications ??= new List<string>();
+        selectedBrowser.Applications.Add(_parentProcess.ProcessName);
+        _configuration.Deserialize(ConfigurationFilePath);
+        Shutdown();
+    }
+
+    private App() : base(){ }
 }
