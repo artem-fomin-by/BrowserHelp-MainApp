@@ -35,8 +35,7 @@
                 <Grid Background="#FFC3C3C3"/>
             </Expander>
             <CheckBox Name ="DefaultBrowserCheckBox"
-                Content="Always open links from " 
-                FontSize="12.0"
+                      FontSize="12.0"
                 />
         </StackPanel>
     </Grid>

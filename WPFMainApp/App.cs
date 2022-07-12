@@ -19,17 +19,17 @@ public class App : Application
 
     private static readonly string ConfigurationFilePath = Path.Combine(ConfigurationFolderPath, "Configuration.json");
 
-    private static Process? _parentProcess;
+    public static Process? ParentProcess { get; private set; }
     private static Config _configuration;
 
     [STAThread]
     public static void Main(string[] args)
     {
         _configuration = GetConfiguration(ConfigurationFilePath, ConfigurationFolderPath);
-        _parentProcess = ParentProcessUtilities.GetParentProcess();
+        ParentProcess = ParentProcessUtilities.GetParentProcess();
         var link = args.Length > 0 ? args[0] : null;
 
-        var browser = ChooseBrowser(link, _parentProcess, _configuration);
+        var browser = ChooseBrowser(link, ParentProcess, _configuration);
         if (browser != null)
         {
             browser.Launch(args.FirstOrDefault() ?? "");
@@ -92,14 +92,14 @@ public class App : Application
 
     public void End(Browser selectedBrowser)
     {
-        if(_parentProcess == null)
+        if(ParentProcess == null)
         {
             Shutdown();
             return;
         }
 
         selectedBrowser.Applications ??= new List<string>();
-        selectedBrowser.Applications.Add(_parentProcess.ProcessName);
+        selectedBrowser.Applications.Add(ParentProcess.ProcessName);
         _configuration.Deserialize(ConfigurationFilePath);
         Shutdown();
     }
