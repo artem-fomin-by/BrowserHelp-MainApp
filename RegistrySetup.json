@@ -1,0 +1,102 @@
+
+{
+    "RegistryKey_ValuesSets": [
+        {
+            "MainKey": "HKEY_LOCAL_MACHINE",
+            "Path": "SOFTWARE\\{0}\\Capabilities",
+            "Values": [
+                { "Name": "ApplicationDescription", "Value": "{0}" },
+                { "Name": "ApplicationIcon", "Value": "{0},0" },
+                { "Name": "ApplicationName", "Value": "{0}" }
+            ]
+        },
+        {
+            "MainKey": "HKEY_LOCAL_MACHINE",
+            "Path": "SOFTWARE\\{0}\\Capabilities\\FileAssociations",
+            "Values": [
+                { "Name": ".htm", "Value": "{0}URL" },
+                { "Name": ".html", "Value": "{0}URL" },
+                { "Name": ".shtml", "Value": "{0}URL" },
+                { "Name": ".xht", "Value": "{0}URL" },
+                { "Name": ".xhtml", "Value": "{0}URL" }
+            ]
+        },
+        {
+            "MainKey": "HKEY_LOCAL_MACHINE",
+            "Path": "SOFTWARE\\{0}\\Capabilities\\URLAssociations",
+            "Values": [
+                { "Name": "ftp", "Value": "{0}URL" },
+                { "Name": "http", "Value": "{0}URL" },
+                { "Name": "https", "Value": "{0}URL" }
+            ]
+        },
+        {
+            "MainKey": "HKEY_LOCAL_MACHINE",
+            "Path": "SOFTWARE\\Clients\\StartMenuInternet\\{0}\\Capabilities",
+            "Values": [
+                { "Name": "ApplicationDescription", "Value": "{0}" },
+                { "Name": "ApplicationIcon", "Value": "{0},0" },
+                { "Name": "ApplicationName", "Value": "{0}" }
+            ]
+        },
+        {
+            "MainKey": "HKEY_LOCAL_MACHINE",
+            "Path": "SOFTWARE\\Clients\\StartMenuInternet\\{0}\\Capabilities\\FileAssociations",
+            "Values": [
+                { "Name": ".htm", "Value": "{0}URL" },
+                { "Name": ".html", "Value": "{0}URL" },
+                { "Name": ".shtml", "Value": "{0}URL" },
+                { "Name": ".xht", "Value": "{0}URL" },
+                { "Name": ".xhtml", "Value": "{0}URL" }
+            ]
+        },
+        {
+            "MainKey": "HKEY_LOCAL_MACHINE",
+            "Path": "SOFTWARE\\Clients\\StartMenuInternet\\{0}\\Capabilities\\URLAssociations",
+            "Values": [
+                { "Name": "ftp", "Value": "{0}URL" },
+                { "Name": "http", "Value": "{0}URL" },
+                { "Name": "https", "Value": "{0}URL" }
+            ]
+        },
+        {
+            "MainKey": "HKEY_LOCAL_MACHINE",
+            "Path": "SOFTWARE\\Clients\\StartMenuInternet\\{0}\\shell\\open\\command",
+            "Values": [
+                { "Name": "", "Value": "{0}" }
+            ]
+        },
+        {
+            "MainKey": "HKEY_LOCAL_MACHINE",
+            "Path": "SOFTWARE\\RegisteredApplications",
+            "Values": [
+                { "Name": "{0}", "Value": "Software\\{0}\\Capabilities" }
+            ]
+        },
+        {
+            "MainKey": "HKEY_LOCAL_MACHINE",
+            "Path": "Software\\Classes\\{0}URL",
+            "Values": [
+                { "Name": "", "Value": "{0} Document" },
+                { "Name": "FriendlyTypeName", "Value": "{0} Document" }
+            ]
+        },
+        {
+            "MainKey": "HKEY_LOCAL_MACHINE",
+            "Path": "Software\\Classes\\{0}URL\\shell",
+            "Values": []
+        },
+        {
+            "MainKey": "HKEY_LOCAL_MACHINE",
+            "Path": "Software\\Classes\\{0}URL\\shell\\open",
+            "Values": []
+        },
+        {
+            "MainKey": "HKEY_LOCAL_MACHINE",
+            "Path": "Software\\Classes\\{0}URL\\shell\\open\\command",
+            "Values": [
+                { "Name": "", "Value": "{0} \"%1\"" }
+            ]
+        }
+    ]
+}
