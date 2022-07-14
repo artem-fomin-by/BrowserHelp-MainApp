@@ -61,7 +61,6 @@ public partial class MainWindow : Window
 
     private Point GetMousePosition()
     {
-
         var mousePosition = new Interop.Win32Point();
         Interop.GetCursorPos(ref mousePosition);
         var mousePositionPoint = new Point(mousePosition.X, mousePosition.Y);
@@ -75,10 +74,10 @@ public partial class MainWindow : Window
             "Always open links from \"{0}\" in selected browser", 
             App.ParentProcess?.ProcessName ?? ""
             );
+        DefaultBrowserCheckBox.Margin = new Thickness(2.0, 2.0, 2.0, 2.0);
 
         ButtonsStackPanel.Width = maxWidth;
 
-        var expanderStackPanel = new StackPanel{ Background = BrowsersSelectionExpander.Background };
         for (var index = 0; index < browsers.Length; index++)
         {
             var browser = browsers[index];
@@ -94,24 +93,13 @@ public partial class MainWindow : Window
             button.Click += (_, _) =>
             {
                 browser.Launch(_link);
-
-                if(DefaultBrowserCheckBox.IsChecked == true)
-                {
-                    _parentApp.End(BrowserSelectionCheckBox.SelectedBrowser ?? browser);
-                }
+                if(DefaultBrowserCheckBox.IsChecked == true) _parentApp.End(browser);
                 else _parentApp.Shutdown();
             };
 
             ButtonsStackPanel.Children.Add(button);
-
-            var checkBox = new BrowserSelectionCheckBox(browser)
-            { Background = BrowsersSelectionExpander.Background };
-            expanderStackPanel.Children.Add(checkBox);
         }
 
-        BrowsersSelectionExpander.Content = expanderStackPanel;
-
-        
         if(App.ParentProcess == null) ((Grid)Content).Children.RemoveAt(2);
     }
 
@@ -133,36 +121,5 @@ public partial class MainWindow : Window
     private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
     {
         AdjustInitPosition();
-    }
-}
-
-class BrowserSelectionCheckBox : CheckBox
-{
-    public static Browser? SelectedBrowser;
-    private static BrowserSelectionCheckBox? SelectedCheckBox;
-    
-    private readonly Browser _browser;
-
-    public BrowserSelectionCheckBox(Browser browser)
-    {
-        _browser = browser;
-
-        Content = browser.Name;
-        Checked += OnChecked_EventHandler;
-        Unchecked += OnUnchecked_EventHandler;
-    }
-
-    private void OnChecked_EventHandler(object? sender, RoutedEventArgs e)
-    {
-        SelectedBrowser = _browser;
-
-        if(SelectedCheckBox != null) SelectedCheckBox.IsChecked = false;
-        SelectedCheckBox = this;
-    }
-
-    private void OnUnchecked_EventHandler(object? sender, RoutedEventArgs e)
-    {
-        SelectedBrowser = null;
-        SelectedCheckBox = null;
     }
 }
