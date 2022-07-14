@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Logic\Logic.csproj" />
-    <ProjectReference Include="..\WPFMainApp\MainApp.csproj" />
+    <ProjectReference Include="..\BrowserHelper\BrowserHelper.csproj" />
   </ItemGroup>
 
 </Project>
