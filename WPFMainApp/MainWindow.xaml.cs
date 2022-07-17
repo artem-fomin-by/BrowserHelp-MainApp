@@ -74,7 +74,6 @@ public partial class MainWindow : Window
             "Always open links from \"{0}\" in selected browser", 
             App.ParentProcess?.ProcessName ?? ""
             );
-        DefaultBrowserCheckBox.Margin = new Thickness(2.0, 2.0, 2.0, 2.0);
 
         ButtonsStackPanel.Width = maxWidth;
 
@@ -93,14 +92,14 @@ public partial class MainWindow : Window
             button.Click += (_, _) =>
             {
                 browser.Launch(_link);
-                if(DefaultBrowserCheckBox.IsChecked == true) _parentApp.End(browser);
-                else _parentApp.Shutdown();
+                if(DefaultBrowserCheckBox.IsChecked == true) _parentApp.SaveNewDefaultBrowser(browser);
+                _parentApp.Shutdown();
             };
 
             ButtonsStackPanel.Children.Add(button);
         }
 
-        if(App.ParentProcess == null) ((Grid)Content).Children.RemoveAt(2);
+        if(App.ParentProcess == null) ((Grid)Content).Children.Remove(DefaultBrowserCheckBox);
     }
 
     private static Size MeasureString(string candidate, FontFamily fontFamily, FontStyle fontStyle, FontWeight fontWeight, FontStretch fontStretch, double fontSize)

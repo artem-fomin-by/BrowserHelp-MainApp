@@ -20,7 +20,7 @@ public class Config
         return null;
     }
 
-    public void Deserialize(string configurationFilePath)
+    public void SaveToJsonFile(string configurationFilePath)
     {
         using var configurationFile = File.Open(configurationFilePath, FileMode.Open, FileAccess.Write);
         JsonSerializer.Serialize(

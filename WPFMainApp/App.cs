@@ -90,18 +90,13 @@ public class App : Application
         }
     }
 
-    public void End(Browser selectedBrowser)
+    public void SaveNewDefaultBrowser(Browser selectedBrowser)
     {
-        if(ParentProcess == null)
-        {
-            Shutdown();
-            return;
-        }
+        Debug.Assert(ParentProcess != null);
 
         selectedBrowser.Applications ??= new List<string>();
         selectedBrowser.Applications.Add(ParentProcess.ProcessName);
-        _configuration.Deserialize(ConfigurationFilePath);
-        Shutdown();
+        _configuration.SaveToJsonFile(ConfigurationFilePath);
     }
 
     private App() : base(){ }
