@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Windows;
-using Logic;
 using Microsoft.Extensions.Configuration;
+using Logic;
 
 namespace MainApp;
 
@@ -18,14 +19,17 @@ public class App : Application
 
     private static readonly string ConfigurationFilePath = Path.Combine(ConfigurationFolderPath, "Configuration.json");
 
+    public static Process? ParentProcess { get; private set; }
+    private static Config _configuration;
+
     [STAThread]
     public static void Main(string[] args)
     {
-        var config = GetConfiguration(ConfigurationFilePath, ConfigurationFolderPath);
-        var parentProcess = ParentProcessUtilities.GetParentProcess();
+        _configuration = GetConfiguration(ConfigurationFilePath, ConfigurationFolderPath);
+        ParentProcess = ParentProcessUtilities.GetParentProcess();
         var link = args.Length > 0 ? args[0] : null;
 
-        var browser = ChooseBrowser(link, parentProcess, config);
+        var browser = ChooseBrowser(link, ParentProcess, _configuration);
         if (browser != null)
         {
             browser.Launch(args.FirstOrDefault() ?? "");
@@ -34,9 +38,9 @@ public class App : Application
         {
             var app = new App();
 
-            if (config.Browsers.Length != 0)
+            if (_configuration.Browsers.Length != 0)
             {
-                app.Run(new MainWindow(app, AppName, config.Browsers, link));
+                app.Run(new MainWindow(app, AppName, _configuration.Browsers, link));
             }
             else
             {
@@ -85,4 +89,15 @@ public class App : Application
             }, new JsonSerializerOptions { WriteIndented = true });
         }
     }
+
+    public void SaveNewDefaultBrowser(Browser selectedBrowser)
+    {
+        Debug.Assert(ParentProcess != null);
+
+        selectedBrowser.Applications ??= new List<string>();
+        selectedBrowser.Applications.Add(ParentProcess.ProcessName);
+        _configuration.SaveToJsonFile(ConfigurationFilePath);
+    }
+
+    private App() : base(){ }
 }

@@ -36,7 +36,7 @@ public class Browser
     public string Name { get; set; }
     public string LaunchCommand { get; set; }
     public string LaunchCommandArgs { get; set; }
-    public string[]? Applications { get; set; }
+    public List<string>? Applications { get; set; }
     public string[]? UrlPatterns { get; set; }
 
     public void Launch(string link = "")
