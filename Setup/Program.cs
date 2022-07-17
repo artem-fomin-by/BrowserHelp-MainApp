@@ -16,7 +16,7 @@ namespace Setup
         public const string MainAppFilesDirectory = @"BrowserHelper\bin\Release\net6.0-windows";
 
         public static readonly string InstallDirPath = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
+            Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
             MainDirectoryName
         );
 

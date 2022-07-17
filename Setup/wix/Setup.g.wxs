@@ -13,68 +13,68 @@
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="INSTALLDIR" Name="ABSOLUTEPATH">
 
-        <Component Id="Component.Logic.dll_1674821942" Guid="2601159c-2189-433d-9cb1-d3e836336318">
-          <File Id="Logic.dll_1674821942" Source="..\BrowserHelper\bin\Release\net6.0-windows\Logic.dll" />
+        <Component Id="Component.Logic.dll_750684036" Guid="2601159c-2189-433d-9cb1-d3e8906846a4">
+          <File Id="Logic.dll_750684036" Source="..\BrowserHelper\bin\Release\net6.0-windows\Logic.dll" />
         </Component>
 
-        <Component Id="Component.Logic.pdb_3675111742" Guid="2601159c-2189-433d-9cb1-d3e804e548a7">
-          <File Id="Logic.pdb_3675111742" Source="..\BrowserHelper\bin\Release\net6.0-windows\Logic.pdb" />
+        <Component Id="Component.Logic.pdb_2776425132" Guid="2601159c-2189-433d-9cb1-d3e8cf460e36">
+          <File Id="Logic.pdb_2776425132" Source="..\BrowserHelper\bin\Release\net6.0-windows\Logic.pdb" />
         </Component>
 
-        <Component Id="Component.BrowserHelper.deps.json_3767014514" Guid="2601159c-2189-433d-9cb1-d3e8919e71c1">
-          <File Id="BrowserHelper.deps.json_3767014514" Source="..\BrowserHelper\bin\Release\net6.0-windows\BrowserHelper.deps.json" />
+        <Component Id="Component.BrowserHelper.deps.json_1878875404" Guid="2601159c-2189-433d-9cb1-d3e856de2d2a">
+          <File Id="BrowserHelper.deps.json_1878875404" Source="..\BrowserHelper\bin\Release\net6.0-windows\BrowserHelper.deps.json" />
         </Component>
 
-        <Component Id="Component.BrowserHelper.dll_3153771685" Guid="2601159c-2189-433d-9cb1-d3e825aa1376">
-          <File Id="BrowserHelper.dll_3153771685" Source="..\BrowserHelper\bin\Release\net6.0-windows\BrowserHelper.dll" />
+        <Component Id="Component.BrowserHelper.dll_2194328754" Guid="2601159c-2189-433d-9cb1-d3e80a8ecf0d">
+          <File Id="BrowserHelper.dll_2194328754" Source="..\BrowserHelper\bin\Release\net6.0-windows\BrowserHelper.dll" />
         </Component>
 
-        <Component Id="Component.BrowserHelper.exe_1197915321" Guid="2601159c-2189-433d-9cb1-d3e88b12d332">
-          <File Id="BrowserHelper.exe_1197915321" Source="..\BrowserHelper\bin\Release\net6.0-windows\BrowserHelper.exe" />
+        <Component Id="Component.BrowserHelper.exe_1364453582" Guid="2601159c-2189-433d-9cb1-d3e8781b2534">
+          <File Id="BrowserHelper.exe_1364453582" Source="..\BrowserHelper\bin\Release\net6.0-windows\BrowserHelper.exe" />
         </Component>
 
-        <Component Id="Component.BrowserHelper.pdb_1153219757" Guid="2601159c-2189-433d-9cb1-d3e8693b1878">
-          <File Id="BrowserHelper.pdb_1153219757" Source="..\BrowserHelper\bin\Release\net6.0-windows\BrowserHelper.pdb" />
+        <Component Id="Component.BrowserHelper.pdb_2167435658" Guid="2601159c-2189-433d-9cb1-d3e8af4e9aa8">
+          <File Id="BrowserHelper.pdb_2167435658" Source="..\BrowserHelper\bin\Release\net6.0-windows\BrowserHelper.pdb" />
         </Component>
 
-        <Component Id="Component.BrowserHelper.runtimeconfig.json_1645350714" Guid="2601159c-2189-433d-9cb1-d3e843c42607">
-          <File Id="BrowserHelper.runtimeconfig.json_1645350714" Source="..\BrowserHelper\bin\Release\net6.0-windows\BrowserHelper.runtimeconfig.json" />
+        <Component Id="Component.BrowserHelper.runtimeconfig.json_248921211" Guid="2601159c-2189-433d-9cb1-d3e89f1edc3c">
+          <File Id="BrowserHelper.runtimeconfig.json_248921211" Source="..\BrowserHelper\bin\Release\net6.0-windows\BrowserHelper.runtimeconfig.json" />
         </Component>
 
-        <Component Id="Component.Microsoft.Extensions.Configuration.Abstractions.dll_3803957502" Guid="2601159c-2189-433d-9cb1-d3e85196527b">
-          <File Id="Microsoft.Extensions.Configuration.Abstractions.dll_3803957502" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll" />
+        <Component Id="Component.Microsoft.Extensions.Configuration.Abstractions.dll_1041451251" Guid="2601159c-2189-433d-9cb1-d3e8165864fd">
+          <File Id="Microsoft.Extensions.Configuration.Abstractions.dll_1041451251" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll" />
         </Component>
 
-        <Component Id="Component.Microsoft.Extensions.Configuration.Binder.dll_2175054800" Guid="2601159c-2189-433d-9cb1-d3e83e8d4f81">
-          <File Id="Microsoft.Extensions.Configuration.Binder.dll_2175054800" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.Configuration.Binder.dll" />
+        <Component Id="Component.Microsoft.Extensions.Configuration.Binder.dll_3251241214" Guid="2601159c-2189-433d-9cb1-d3e8d3b67e2e">
+          <File Id="Microsoft.Extensions.Configuration.Binder.dll_3251241214" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.Configuration.Binder.dll" />
         </Component>
 
-        <Component Id="Component.Microsoft.Extensions.Configuration.dll_761687522" Guid="2601159c-2189-433d-9cb1-d3e8cd9def36">
-          <File Id="Microsoft.Extensions.Configuration.dll_761687522" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.Configuration.dll" />
+        <Component Id="Component.Microsoft.Extensions.Configuration.dll_2712497049" Guid="2601159c-2189-433d-9cb1-d3e85ccdc0b7">
+          <File Id="Microsoft.Extensions.Configuration.dll_2712497049" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.Configuration.dll" />
         </Component>
 
-        <Component Id="Component.Microsoft.Extensions.Configuration.FileExtensions.dll_244968942" Guid="2601159c-2189-433d-9cb1-d3e85d2493ea">
-          <File Id="Microsoft.Extensions.Configuration.FileExtensions.dll_244968942" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.Configuration.FileExtensions.dll" />
+        <Component Id="Component.Microsoft.Extensions.Configuration.FileExtensions.dll_959707555" Guid="2601159c-2189-433d-9cb1-d3e8447b8d45">
+          <File Id="Microsoft.Extensions.Configuration.FileExtensions.dll_959707555" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.Configuration.FileExtensions.dll" />
         </Component>
 
-        <Component Id="Component.Microsoft.Extensions.Configuration.Json.dll_2233913844" Guid="2601159c-2189-433d-9cb1-d3e825664ccd">
-          <File Id="Microsoft.Extensions.Configuration.Json.dll_2233913844" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.Configuration.Json.dll" />
+        <Component Id="Component.Microsoft.Extensions.Configuration.Json.dll_1002852619" Guid="2601159c-2189-433d-9cb1-d3e812b0d4f4">
+          <File Id="Microsoft.Extensions.Configuration.Json.dll_1002852619" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.Configuration.Json.dll" />
         </Component>
 
-        <Component Id="Component.Microsoft.Extensions.FileProviders.Abstractions.dll_1880008798" Guid="2601159c-2189-433d-9cb1-d3e85192ec21">
-          <File Id="Microsoft.Extensions.FileProviders.Abstractions.dll_1880008798" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.FileProviders.Abstractions.dll" />
+        <Component Id="Component.Microsoft.Extensions.FileProviders.Abstractions.dll_1494713426" Guid="2601159c-2189-433d-9cb1-d3e8747dcbff">
+          <File Id="Microsoft.Extensions.FileProviders.Abstractions.dll_1494713426" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.FileProviders.Abstractions.dll" />
         </Component>
 
-        <Component Id="Component.Microsoft.Extensions.FileProviders.Physical.dll_3179254276" Guid="2601159c-2189-433d-9cb1-d3e88838752d">
-          <File Id="Microsoft.Extensions.FileProviders.Physical.dll_3179254276" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.FileProviders.Physical.dll" />
+        <Component Id="Component.Microsoft.Extensions.FileProviders.Physical.dll_1118059672" Guid="2601159c-2189-433d-9cb1-d3e85173d4b4">
+          <File Id="Microsoft.Extensions.FileProviders.Physical.dll_1118059672" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.FileProviders.Physical.dll" />
         </Component>
 
-        <Component Id="Component.Microsoft.Extensions.FileSystemGlobbing.dll_1231891409" Guid="2601159c-2189-433d-9cb1-d3e8e75e7c51">
-          <File Id="Microsoft.Extensions.FileSystemGlobbing.dll_1231891409" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.FileSystemGlobbing.dll" />
+        <Component Id="Component.Microsoft.Extensions.FileSystemGlobbing.dll_691099790" Guid="2601159c-2189-433d-9cb1-d3e8c4c0a33d">
+          <File Id="Microsoft.Extensions.FileSystemGlobbing.dll_691099790" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.FileSystemGlobbing.dll" />
         </Component>
 
-        <Component Id="Component.Microsoft.Extensions.Primitives.dll_3119501586" Guid="2601159c-2189-433d-9cb1-d3e81bd6757a">
-          <File Id="Microsoft.Extensions.Primitives.dll_3119501586" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.Primitives.dll" />
+        <Component Id="Component.Microsoft.Extensions.Primitives.dll_1777177533" Guid="2601159c-2189-433d-9cb1-d3e80a9b8d33">
+          <File Id="Microsoft.Extensions.Primitives.dll_1777177533" Source="..\BrowserHelper\bin\Release\net6.0-windows\Microsoft.Extensions.Primitives.dll" />
         </Component>
 
       </Directory>
@@ -92,7 +92,7 @@
 
         <Component Id="Registry.2" Guid="2601159c-2189-433d-9cb1-d3e8a390771f">
           <RegistryKey Root="HKLM" Key="SOFTWARE\BrowserHelper\Capabilities">
-            <RegistryValue Id="ApplicationIcon" Type="string" KeyPath="yes" Value="&quot;C:\Program Files (x86)\Browser Helper\BrowserHelper.exe&quot;,0" Name="ApplicationIcon" />
+            <RegistryValue Id="ApplicationIcon" Type="string" KeyPath="yes" Value="&quot;C:\Program Files\Browser Helper\BrowserHelper.exe&quot;,0" Name="ApplicationIcon" />
           </RegistryKey>
 
           <CreateFolder />
@@ -180,7 +180,7 @@
 
         <Component Id="Registry.13" Guid="2601159c-2189-433d-9cb1-d3e8b1071775">
           <RegistryKey Root="HKLM" Key="SOFTWARE\Clients\StartMenuInternet\BrowserHelper\Capabilities">
-            <RegistryValue Id="ApplicationIcon.1" Type="string" KeyPath="yes" Value="&quot;C:\Program Files (x86)\Browser Helper\BrowserHelper.exe&quot;,0" Name="ApplicationIcon" />
+            <RegistryValue Id="ApplicationIcon.1" Type="string" KeyPath="yes" Value="&quot;C:\Program Files\Browser Helper\BrowserHelper.exe&quot;,0" Name="ApplicationIcon" />
           </RegistryKey>
 
           <CreateFolder />
@@ -260,7 +260,7 @@
 
         <Component Id="Registry.23" Guid="2601159c-2189-433d-9cb1-d3e8b1081775">
           <RegistryKey Root="HKLM" Key="SOFTWARE\Clients\StartMenuInternet\BrowserHelper\shell\open\command">
-            <RegistryValue Id="RegValue" Type="string" KeyPath="yes" Value="&quot;C:\Program Files (x86)\Browser Helper\BrowserHelper.exe&quot;" />
+            <RegistryValue Id="RegValue" Type="string" KeyPath="yes" Value="&quot;C:\Program Files\Browser Helper\BrowserHelper.exe&quot;" />
           </RegistryKey>
 
           <CreateFolder />
@@ -292,7 +292,7 @@
 
         <Component Id="Registry.27" Guid="2601159c-2189-433d-9cb1-d3e8266a4509">
           <RegistryKey Root="HKLM" Key="Software\Classes\BrowserHelperURL\shell\open\command">
-            <RegistryValue Id="RegValue.2" Type="expandable" KeyPath="yes" Value="&quot;C:\Program Files (x86)\Browser Helper\BrowserHelper.exe&quot; &quot;%1&quot;" />
+            <RegistryValue Id="RegValue.2" Type="expandable" KeyPath="yes" Value="&quot;C:\Program Files\Browser Helper\BrowserHelper.exe&quot; &quot;%1&quot;" />
           </RegistryKey>
 
           <CreateFolder />
@@ -301,30 +301,30 @@
       </Directory>
     </Directory>
 
-    <CustomAction Id="Set_DirAbsolutePath" Property="INSTALLDIR" Value="C:\Program Files (x86)\Browser Helper" />
+    <CustomAction Id="Set_DirAbsolutePath" Property="INSTALLDIR" Value="C:\Program Files\Browser Helper" />
 
     <UIRef Id="WixUI_Minimal" />
     <UIRef Id="WixUI_ErrorProgressText" />
 
-    <Property Id="INSTALLDIR_ABSOLUTEPATH" Value="C:\Program Files (x86)\Browser Helper" />
+    <Property Id="INSTALLDIR_ABSOLUTEPATH" Value="C:\Program Files\Browser Helper" />
 
     <Feature Id="Complete" Title="Complete" Absent="allow" Level="1">
-      <ComponentRef Id="Component.Logic.dll_1674821942" />
-      <ComponentRef Id="Component.Logic.pdb_3675111742" />
-      <ComponentRef Id="Component.BrowserHelper.deps.json_3767014514" />
-      <ComponentRef Id="Component.BrowserHelper.dll_3153771685" />
-      <ComponentRef Id="Component.BrowserHelper.exe_1197915321" />
-      <ComponentRef Id="Component.BrowserHelper.pdb_1153219757" />
-      <ComponentRef Id="Component.BrowserHelper.runtimeconfig.json_1645350714" />
-      <ComponentRef Id="Component.Microsoft.Extensions.Configuration.Abstractions.dll_3803957502" />
-      <ComponentRef Id="Component.Microsoft.Extensions.Configuration.Binder.dll_2175054800" />
-      <ComponentRef Id="Component.Microsoft.Extensions.Configuration.dll_761687522" />
-      <ComponentRef Id="Component.Microsoft.Extensions.Configuration.FileExtensions.dll_244968942" />
-      <ComponentRef Id="Component.Microsoft.Extensions.Configuration.Json.dll_2233913844" />
-      <ComponentRef Id="Component.Microsoft.Extensions.FileProviders.Abstractions.dll_1880008798" />
-      <ComponentRef Id="Component.Microsoft.Extensions.FileProviders.Physical.dll_3179254276" />
-      <ComponentRef Id="Component.Microsoft.Extensions.FileSystemGlobbing.dll_1231891409" />
-      <ComponentRef Id="Component.Microsoft.Extensions.Primitives.dll_3119501586" />
+      <ComponentRef Id="Component.Logic.dll_750684036" />
+      <ComponentRef Id="Component.Logic.pdb_2776425132" />
+      <ComponentRef Id="Component.BrowserHelper.deps.json_1878875404" />
+      <ComponentRef Id="Component.BrowserHelper.dll_2194328754" />
+      <ComponentRef Id="Component.BrowserHelper.exe_1364453582" />
+      <ComponentRef Id="Component.BrowserHelper.pdb_2167435658" />
+      <ComponentRef Id="Component.BrowserHelper.runtimeconfig.json_248921211" />
+      <ComponentRef Id="Component.Microsoft.Extensions.Configuration.Abstractions.dll_1041451251" />
+      <ComponentRef Id="Component.Microsoft.Extensions.Configuration.Binder.dll_3251241214" />
+      <ComponentRef Id="Component.Microsoft.Extensions.Configuration.dll_2712497049" />
+      <ComponentRef Id="Component.Microsoft.Extensions.Configuration.FileExtensions.dll_959707555" />
+      <ComponentRef Id="Component.Microsoft.Extensions.Configuration.Json.dll_1002852619" />
+      <ComponentRef Id="Component.Microsoft.Extensions.FileProviders.Abstractions.dll_1494713426" />
+      <ComponentRef Id="Component.Microsoft.Extensions.FileProviders.Physical.dll_1118059672" />
+      <ComponentRef Id="Component.Microsoft.Extensions.FileSystemGlobbing.dll_691099790" />
+      <ComponentRef Id="Component.Microsoft.Extensions.Primitives.dll_1777177533" />
       <ComponentRef Id="Registry.1" />
       <ComponentRef Id="Registry.2" />
       <ComponentRef Id="Registry.3" />
