@@ -12,12 +12,13 @@ namespace MainApp;
 
 public class App : Application
 {
-    public const string AppName = "MainApp";
+    public static readonly string AppName = "BrowserHelper";
 
     private static readonly string ConfigurationFolderPath =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName);
 
-    private static readonly string ConfigurationFilePath = Path.Combine(ConfigurationFolderPath, "Configuration.json");
+    private static readonly string ConfigurationFilePath = 
+        Path.Combine(ConfigurationFolderPath, "Configuration.json");
 
     public static Process? ParentProcess { get; private set; }
     private static Config _configuration;
