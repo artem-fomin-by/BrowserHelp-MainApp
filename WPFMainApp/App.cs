@@ -21,7 +21,7 @@ public class App : Application
     [STAThread]
     public static void Main(string[] args)
     {
-        var config = GetConfiguration();
+        var config = GetConfiguration(ConfigurationFilePath, ConfigurationFolderPath);
         var parentProcess = ParentProcessUtilities.GetParentProcess();
         var link = args.Length > 0 ? args[0] : null;
 
@@ -47,24 +47,15 @@ public class App : Application
 
     private static Browser? ChooseBrowser(string? link, Process? parentProcess, Config config)
     {
-        if(parentProcess != null)
-        {
-            var browser = config.FindBrowser(parentProcess.ProcessName);
-            if(browser != null)
-            {
-                return browser;
-            }
-        }
-
-        return null;
+        return config.FindBrowser(link ?? "", parentProcess?.ProcessName);
     }
 
-    private static Config GetConfiguration()
+    private static Config GetConfiguration(string configurationFilePath, string configurationFolderPath)
     {
-        EnsureConfiguration(ConfigurationFilePath);
+        EnsureConfiguration(configurationFilePath, configurationFolderPath);
 
         var root = new ConfigurationManager()
-            .AddJsonFile(ConfigurationFilePath)
+            .AddJsonFile(configurationFilePath)
             .Build();
 
         var instance = new Config();
@@ -72,11 +63,11 @@ public class App : Application
         return instance;
     }
 
-    private static void EnsureConfiguration(string configurationFilePath)
+    private static void EnsureConfiguration(string configurationFilePath, string configurationFolderPath)
     {
-        if (!Directory.Exists(ConfigurationFolderPath))
+        if (!Directory.Exists(configurationFolderPath))
         {
-            Directory.CreateDirectory(ConfigurationFolderPath);
+            Directory.CreateDirectory(configurationFolderPath);
         }
 
         if (File.Exists(configurationFilePath))
