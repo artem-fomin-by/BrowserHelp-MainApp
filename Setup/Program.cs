@@ -13,7 +13,7 @@ namespace Setup
     {
         public const string AppName = "BrowserHelper";
         public const string MainDirectoryName = "Browser Helper";
-        public const string MainAppFilesDirectory = @"BrowserHelper\bin\Debug\net6.0-windows";
+        public const string MainAppFilesDirectory = @"BrowserHelper\bin\Release\net6.0-windows";
 
         public static readonly string InstallDirPath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
@@ -80,12 +80,11 @@ namespace Setup
                 var serializer = new DataContractJsonSerializer(typeof(JsonRegKeySet));
                 var regKeySet = (JsonRegKeySet) serializer.ReadObject(registrySetupFile);
                 res = regKeySet.RegistryKey_ValuesSets
-                    .Select(x => x.Values.Select(y => (x.MainKey, x.Path, y.Name, y.Value)))
-                    .SelectMany(x => x)
-                    .Select(x => (x.MainKey, string.Format(x.Path, AppName), x.Name, x.Value))
+                    .SelectMany(x => x.Values.Select(y => (x.MainKey, x.Path, y.Name, y.Value)))
+                    .Select(x => (x.MainKey, Path: string.Format(x.Path, AppName), x.Name, x.Value))
                     .Select(x =>
                     {
-                        var regPath = x.MainKey + '\\' + x.Item2;
+                        var regPath = x.MainKey + '\\' + x.Path;
                         string value;
                         if(PathKeys.ContainsKey(regPath) && PathKeys[regPath].Equals(x.Name))
                         {
@@ -96,13 +95,11 @@ namespace Setup
                             value = string.Format(x.Value, AppName);
                         }
 
-                        return (x.MainKey, x.Item2, x.Name, value);
+                        return (x.MainKey, x.Path, x.Name, Value: value);
                     })
-                    .Select(x => (StartKeys[x.MainKey], x.Item2, x.Name, x.Item4))
-                    .Select(x => 
-                        (x.Item1, x.Item2, string.Format(x.Name, AppName), x.Item4))
-                    
-                    .Select(x => new RegValue(x.Item1, x.Item2, x.Item3, x.Item4))
+                    .Select(x => (MainKey: StartKeys[x.MainKey], x.Path, x.Name, x.Value))
+                    .Select(x => (x.MainKey, x.Path, Name: string.Format(x.Name, AppName), x.Value))
+                    .Select(x => new RegValue(x.MainKey, x.Path, x.Name, x.Value))
                     .ToArray();
             }
 

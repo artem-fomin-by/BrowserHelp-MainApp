@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Logic\Logic.csproj" />
-    <ProjectReference Include="..\Setup\Setup.csproj" />
   </ItemGroup>
 
 </Project>

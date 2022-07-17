@@ -7,13 +7,12 @@ using System.Text.Json;
 using System.Windows;
 using Microsoft.Extensions.Configuration;
 using Logic;
-using Pr = Setup.Program;
 
 namespace MainApp;
 
 public class App : Application
 {
-    public static readonly string AppName = Pr.AppName;
+    public static readonly string AppName = "BrowserHelper";
 
     private static readonly string ConfigurationFolderPath =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName);
