@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="NoBrowsersWindow" Height="450" Width="800">
+        Title="NoBrowsersWindow"
+        WindowStyle="ToolWindow"
+        Height="Auto" 
+        Width="Auto"
+        >
     <Grid>
-        
+        <Label Content="No browsers have been found" FontSize="12.0"/>
+
     </Grid>
 </Window>
